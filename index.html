@@ -181,6 +181,7 @@
             display: flex;
             gap: 1.5rem;
             margin-top: 2.5rem;
+            padding-left: 8rem;
         }
 
         .btn {
@@ -596,7 +597,6 @@
             margin-bottom: 1.5rem;
             line-height: 1.7;
         }
-
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
@@ -610,8 +610,7 @@
             font-weight: 500;
             border: 1px solid;
         }
-
-        /* Color-coded tech tags */
+/* Color-coded tech tags */
         .tech-tag.python {
             background: rgba(255, 212, 59, 0.1);
             color: #ffd43b;
@@ -649,9 +648,9 @@
         }
 
         .tech-tag.django {
-            background: rgba(9, 46, 32, 0.3);
-            color: #0c4b33;
-            border-color: rgba(9, 46, 32, 0.5);
+            background: rgba(12, 75, 51, 0.1);
+            color: #0c9e70;
+            border-color: rgba(12, 158, 112, 0.3);
         }
 
         .tech-tag.fastapi {
@@ -678,6 +677,7 @@
             color: var(--accent-purple);
             border-color: rgba(139, 92, 246, 0.3);
         }
+
 
         /* Contact Section */
         #contact {
@@ -863,7 +863,7 @@
                         <div class="timeline-list-description">
                             <p><strong>GPA:</strong> 3.89/4.0
                             <p><strong>Activities:</strong> CTF Cybersecurity Team, Women in Computing, WNUR 89.3 Radio Show</p>
-                            <p><strong>2x National Science Foundation (NSF) Research Grantee (2022, 2023)</strong></p>
+                            <p><strong>National Science Foundation (NSF) Research Grantee (2022, 2023)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -963,6 +963,7 @@
         </section>
 
         <!-- Projects Section -->
+         <!-- Projects Section -->
         <section id="projects">
             <div class="section-header">
                 <h2 class="section-title">Projects & Research</h2>
@@ -971,9 +972,6 @@
             <div class="projects-grid">
                 <!-- PROJECT 1 -->
                 <div class="project-card" onclick="window.location.href='project-dream-lakehouse.html'" style="cursor: pointer;">
-                    <!-- TO ADD IMAGE: Create an 'images' folder and add your screenshot
-                         Then in CSS, find .project-image and replace background with:
-                         background: url('images/dream-lakehouse.png') center/cover; -->
                     <div class="project-image"></div>
                     <div class="project-content">
                         <div class="project-header">
@@ -981,12 +979,13 @@
                             <a href="project-dream-lakehouse.html" class="project-link" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Scalable AWS lakehouse and Bedrock-based pipeline for ingesting, storing, and analyzing dream and film data through structured ETL and ML workflows.
+                            Cinematic dream journal that transforms written dreams into surreal short films using AWS Bedrock (Claude + Luma Ray 2).
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag typescript">TypeScript</span>
-                            <span class="tech-tag aws">AWS</span>
-                            <span class="tech-tag bedrock">Bedrock</span>
+                            <span class="tech-tag python">Python</span>
+                            <span class="tech-tag react">React</span>
+                            <span class="tech-tag aws">AWS Bedrock</span>
                             <span class="tech-tag s3">S3</span>
                             <span class="tech-tag fastapi">FastAPI</span>
                             <span class="tech-tag">ETL</span>
@@ -1003,10 +1002,14 @@
                             <a href="https://github.com/parikhsachi/email-intelligence-platform" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Enterprise-grade email processing system with automated parsing, categorization, and insights generation.
+                            Event-driven analytics platform that processes customer emails to generate business insights using AI-powered sentiment analysis and topic clustering.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag java">Java</span>
+                            <span class="tech-tag aws">AWS Lambda</span>
+                            <span class="tech-tag aws">AWS Bedrock</span>
+                            <span class="tech-tag aws">DynamoDB</span>
+                            <span class="tech-tag react">React</span>
                             <span class="tech-tag nlp">NLP</span>
                             <span class="tech-tag ml">ML</span>
                         </div>
@@ -1022,14 +1025,14 @@
                             <a href="https://github.com/parikhsachi/CNN-dogbreed-classifier" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Algorithm to identify canine breeds from images with 85%+ accuracy using transfer learning from ResNet-50.
+                            Deep learning model to identify canine breeds from images with 85%+ accuracy using transfer learning from ResNet-50.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
-                            <span class="tech-tag tensorflow">TensorFlow</span>
                             <span class="tech-tag keras">Keras</span>
                             <span class="tech-tag cnn">CNN</span>
-                            <span class="tech-tag">Transfer Learning</span>
+                            <span class="tech-tag">ResNet-50</span>
+                            <span class="tech-tag jupyter">Jupyter</span>
                         </div>
                     </div>
                 </div>
@@ -1050,7 +1053,7 @@
                             <span class="tech-tag django">Django</span>
                             <span class="tech-tag react">React</span>
                             <span class="tech-tag">Spotify API</span>
-                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag ml">ML</span>
                         </div>
                     </div>
                 </div>
@@ -1064,14 +1067,14 @@
                             <a href="https://github.com/parikhsachi/RNN-TV-script-generator" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            RNN trained on 27 seasons of Simpsons scripts to generate new scenes using TensorFlow with LSTM cells.
+                            Recurrent neural network trained on 27 seasons of Simpsons scripts to generate new scenes using LSTM cells.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
                             <span class="tech-tag tensorflow">TensorFlow</span>
                             <span class="tech-tag rnn">RNN</span>
                             <span class="tech-tag lstm">LSTM</span>
-                            <span class="tech-tag nlp">NLP</span>
+                            <span class="tech-tag jupyter">Jupyter</span>
                         </div>
                     </div>
                 </div>
@@ -1085,12 +1088,13 @@
                             <a href="https://github.com/parikhsachi/RL-quadcopter-training-to-fly" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Autonomous quadcopter training using reinforcement learning with policy gradient methods and reward shaping.
+                            Autonomous quadcopter training using deep reinforcement learning with DDPG and reward shaping.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
-                            <span class="tech-tag ml">Reinforcement Learning</span>
-                            <span class="tech-tag">Policy Gradient</span>
+                            <span class="tech-tag">DDPG</span>
+                            <span class="tech-tag ml">RL</span>
+                            <span class="tech-tag">Actor-Critic</span>
                             <span class="tech-tag jupyter">Jupyter</span>
                         </div>
                     </div>
@@ -1105,13 +1109,13 @@
                             <a href="https://github.com/parikhsachi/GAN-generating-faces" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Generative Adversarial Network for creating realistic face images through adversarial training.
+                            Deep convolutional GAN for generating realistic face images through adversarial training on CelebA dataset.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
+                            <span class="tech-tag tensorflow">TensorFlow</span>
                             <span class="tech-tag gan">GANs</span>
-                            <span class="tech-tag ml">Deep Learning</span>
-                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">DCGAN</span>
                             <span class="tech-tag jupyter">Jupyter</span>
                         </div>
                     </div>
@@ -1126,13 +1130,13 @@
                             <a href="https://github.com/parikhsachi/ZebrafishDrugDiscovery" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            ML classifiers and neural networks analyzing zebrafish behavior patterns to identify neuroactive compounds.
+                            Computer vision system analyzing zebrafish behavior patterns to identify neuroactive compounds for drug discovery.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
-                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">OpenCV</span>
                             <span class="tech-tag cnn">CNNs</span>
-                            <span class="tech-tag ml">ML Classifiers</span>
+                            <span class="tech-tag ml">ML</span>
                             <span class="tech-tag jupyter">Jupyter</span>
                         </div>
                     </div>
@@ -1147,12 +1151,12 @@
                             <a href="https://github.com/parikhsachi/FNN-predicting-bike-share-data" class="project-link" target="_blank" onclick="event.stopPropagation()">↗</a>
                         </div>
                         <p class="project-description">
-                            Feedforward neural network built from scratch with backpropagation and gradient descent for bike-share predictions.
+                            Neural network built from scratch using NumPy with custom backpropagation and gradient descent for time-series predictions.
                         </p>
                         <div class="tech-tags">
                             <span class="tech-tag python">Python</span>
-                            <span class="tech-tag ml">Neural Networks</span>
                             <span class="tech-tag">NumPy</span>
+                            <span class="tech-tag ml">Neural Networks</span>
                             <span class="tech-tag">Backpropagation</span>
                             <span class="tech-tag jupyter">Jupyter</span>
                         </div>
