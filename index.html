@@ -506,6 +506,46 @@
       gap: 1.6rem;
     }
 
+    /* === Timeline cards with logo slot (like the mock) === */
+.timeline-list-content{
+  display: grid;
+  grid-template-columns: 64px 1fr; /* logo | text */
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.timeline-logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(8,10,16,0.35);
+  border: 1px solid rgba(170,200,255,0.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 0 22px rgba(120,160,255,0.10);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.timeline-logo img{
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(120,160,255,0.18));
+  opacity: 0.95;
+}
+
+/* optional: for “letter mark” logos that look too small */
+.timeline-logo img.full{
+  width: 88%;
+  height: 88%;
+}
+
+/* Wrap all existing text content in this */
+.timeline-body{
+  min-width: 0;
+}
+
+
     .project-card{
       background: rgba(12,18,34,0.58);
       border-radius: 16px;
@@ -672,6 +712,129 @@
   border-color: rgba(170,200,255,0.12);
   background: linear-gradient(180deg, rgba(12,18,34,0.70), rgba(8,10,16,0.45));
 }
+.timeline-logo{
+  background:
+    radial-gradient(80px 60px at 30% 30%, rgba(170,200,255,0.10), transparent 60%),
+    rgba(8,10,16,0.35);
+}
+
+/* --- Skills layout (drop into your CSS) --- */
+.skill-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.skill-box{
+  background: rgba(12,18,34,0.58);
+  border: 1px solid rgba(170,200,255,0.12);
+  border-radius: 16px;
+  padding: 1.2rem 1.25rem 1.25rem;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 40px rgba(0,0,0,0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-box::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  background:
+    radial-gradient(520px 260px at 20% 10%, rgba(170,200,255,0.14), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.04), transparent 35%);
+  opacity: 0.7;
+  pointer-events:none;
+}
+
+.skill-box-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-box-title{
+  font-family: var(--mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: rgba(230,240,255,0.92);
+}
+
+.skill-box-meta{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(170,200,255,0.85);
+  border: 1px solid rgba(170,200,255,0.18);
+  background: rgba(8,10,16,0.28);
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.skill-box-wide{
+  grid-column: 1 / -1; /* coursework spans both columns */
+}
+
+.pill-list{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Reuse your existing .pill style if you already have it.
+   If not, this matches your theme. */
+.pill{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(170,200,255,0.18);
+  background: rgba(8,10,16,0.28);
+  color: rgba(200,220,255,0.84);
+  display: inline-flex;
+  align-items:center;
+  gap: 0.4rem;
+}
+
+/* Links that still look like pills */
+.pill-link{
+  text-decoration: none;
+  display: inline-flex;
+}
+
+.pill-cta{
+  border-color: rgba(170,200,255,0.24);
+  background: rgba(12,18,34,0.42);
+}
+
+.pill-link:hover .pill-cta{
+  transform: translateY(-1px);
+  border-color: rgba(170,200,255,0.34);
+  box-shadow: 0 0 18px rgba(120,160,255,0.10);
+}
+.hero-left{ min-width: 0; }
+.hero-right{ min-width: 0; }
+
+
+/* Responsive */
+@media (max-width: 900px){
+  .skill-grid{
+    grid-template-columns: 1fr;
+  }
+  .skill-box-wide{
+    grid-column: auto;
+  }
+}
+
+
 
 
 /* if any old .project-image remains, kill it cleanly */
@@ -740,47 +903,55 @@
     </nav>
   </header>
 
-  <div class="container">
-    <!-- HERO -->
-    <section id="home" class="hero-about">
-      <div class="fade-in">
-        <div class="terminal-panel">
-          <div class="terminal-top">
-            <div class="terminal-dots" aria-hidden="true">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            </div>
-          </div>
+<div class="container">
+  <!-- HERO -->
+  <section id="home" class="hero-about">
 
-          <h1 class="hero-name">Sachi Parikh</h1>
-
-          <div class="hero-lines">
-            <div><span class="prompt">&gt;</span> currently: software development engineer @ amazon</div>
-            <div><span class="prompt">&gt;</span> prev: machine learning research at stanford, ucsf + nyu  </div>
-            <div><span class="prompt">&gt;</span> prev: computer science + philosophy @ northwestern</div>
-            <div><span class="prompt">&gt;</span> interests: machine learning, security, networking</div>
-          </div>
-
-          <div class="cta-row">
-            <a class="key-btn" href="https://github.com/parikhsachi">
-              GitHub
-              <img src="images/icons/launch.svg" alt="">
-            </a>
-
-            <a class="key-btn" href="https://medium.com/@parikhsachi" target="_blank" rel="noopener">
-              Medium
-              <img src="images/icons/launch.svg" alt="">
-            </a>
-
-            <a class="key-btn" href="images/Parikh_Sachi_2024.pdf">
-              Resume
-              <img src="images/icons/launch.svg" alt="">
-            </a>
-
+    <!-- LEFT COLUMN -->
+    <div class="hero-left fade-in">
+      <div class="terminal-panel">
+        <div class="terminal-top">
+          <div class="terminal-dots" aria-hidden="true">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
           </div>
         </div>
-          <div class="hero-art-wrap fade-in" aria-hidden="true">
-    <img src="images/hero-art.png" alt="">
-  </div>
+
+        <h1 class="hero-name">Sachi Parikh</h1>
+
+        <div class="hero-lines">
+          <div><span class="prompt">&gt;</span> currently: software development engineer @ amazon</div>
+          <div><span class="prompt">&gt;</span> prev: machine learning research at stanford, ucsf + nyu</div>
+          <div><span class="prompt">&gt;</span> prev: computer science + philosophy @ northwestern</div>
+          <div><span class="prompt">&gt;</span> interests: machine learning, security, networking</div>
+        </div>
+
+        <div class="cta-row">
+          <a class="key-btn" href="https://github.com/parikhsachi" target="_blank" rel="noopener">
+            GitHub
+            <img src="images/icons/launch.svg" alt="">
+          </a>
+
+          <a class="key-btn" href="https://medium.com/@parikhsachi" target="_blank" rel="noopener">
+            Medium
+            <img src="images/icons/launch.svg" alt="">
+          </a>
+
+          <a class="key-btn" href="images/Parikh_Sachi_2024.pdf" target="_blank" rel="noopener">
+            Resume
+            <img src="images/icons/launch.svg" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="hero-right hero-art-wrap fade-in" aria-hidden="true">
+      <img src="images/hero-art.png" alt="">
+    </div>
+
+  </section>
+</div>
+
 
     <!-- EDUCATION -->
     <section id="education">
@@ -792,6 +963,11 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+              <div class="timeline-logo">
+    <img src="images/northwestern.png" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">2021 - 2025</div>
             <h3 class="timeline-list-title">Northwestern University, <em>Evanston, IL</em></h3>
             <div class="timeline-list-org">Bachelor of Arts in Computer Science, Minor in Philosophy</div>
@@ -800,12 +976,18 @@
               <p><strong>Activities:</strong> CTF Cybersecurity Team, Women in Computing, DJ @ WNUR 89.3 Rock Show</p>
               <p><strong>National Science Foundation (NSF) Research Grantee (2022, 2023)</strong></p>
             </div>
+                </div>
           </div>
         </div>
 
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                          <div class="timeline-logo">
+    <img src="images/lynbrook.png" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">2017 - 2021</div>
             <h3 class="timeline-list-title">Lynbrook High School, <em>Cupertino, CA</em></h3>
             <div class="timeline-list-description">
@@ -813,6 +995,7 @@
               <p><strong>National Merit Commended Scholar (2020)</strong></p>
               <p><strong>ML4ALL Conference Speaker (2019)</strong> - 500+ attendees, 400,000+ views</p>
             </div>
+                            </div>
           </div>
         </div>
       </div>
@@ -828,6 +1011,11 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                      <div class="timeline-logo">
+    <img src="images/amazon.png" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">Sept 2025 — Present, June - Sept 2024 (Intern)</div>
             <h3 class="timeline-list-title">Software Development Engineer @ Amazon</h3>
             <div class="timeline-list-description">
@@ -836,12 +1024,18 @@
               <p> - Security Guardian: conducting threat modeling &amp; comprehensive security reviews</p>
               <p> - Spearheading Bedrock integration with ticket queue for autonomous CLI execution/customer query handling</p>
             </div>
+            </div>
           </div>
         </div>
 
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                      <div class="timeline-logo">
+    <img src="images/nyu.jpg" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">June 2022 - Dec 2023</div>
             <h3 class="timeline-list-title">NSF Research Fellow @ NYU Center for Cybersecurity</h3>
             <div class="timeline-list-description">
@@ -851,18 +1045,6 @@
               <p> - Applied Natural Language Processing techniques using spaCy to develop database of drug trafficking organizations</p>
               <p> - Published research on encryption methods used by overseas drug trafficking organizations</p>
             </div>
-          </div>
-        </div>
-
-        <div class="timeline-list-item">
-          <div class="timeline-node"></div>
-          <div class="timeline-list-content">
-            <div class="timeline-list-dates">Aug 2020 - June 2021</div>
-            <h3 class="timeline-list-title">Technical Curriculum Lead @ LingHacks</h3>
-            <div class="timeline-list-description">
-              <p> - Led curriculum development for computational linguistics hackathon with chapters nationwide</p>
-              <p> - Created comprehensive Natural Language Processing workshops and educational content</p>
-              <p> - Mentored participants in Kaggle competitions and NLP projects</p>
             </div>
           </div>
         </div>
@@ -870,6 +1052,30 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+            <div class="timeline-logo">
+    <img src="images/linghacks.jpg" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
+            <div class="timeline-list-dates">Aug 2020 - June 2021</div>
+            <h3 class="timeline-list-title">Technical Curriculum Lead @ LingHacks</h3>
+            <div class="timeline-list-description">
+              <p> - Led curriculum development for computational linguistics hackathon with chapters nationwide</p>
+              <p> - Created comprehensive Natural Language Processing workshops and educational content</p>
+              <p> - Mentored participants in Kaggle competitions and NLP projects</p>
+            </div>
+  </div>
+          </div>
+        </div>
+
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+                        <div class="timeline-logo">
+    <img src="images/ucsf.jpg" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">June - Aug 2020</div>
             <h3 class="timeline-list-title">Machine Learning Research Intern @ UCSF Sirota Lab</h3>
             <div class="timeline-list-description">
@@ -878,12 +1084,18 @@
               <p>- Collaborated with Dr. Marina Sirota and Dr. Chioma Belonwu on ML-driven biomarker discovery</p>
               <p>- Published abstract in American Medical Informatics Association (AMIA) Journal</p>
             </div>
+            </div>
           </div>
         </div>
 
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                        <div class="timeline-logo">
+    <img src="images/stanford.jpg" alt="Northwestern University logo" class="full">
+  </div>
+
+  <div class="timeline-body">
             <div class="timeline-list-dates">Oct 2019 - May 2020</div>
             <h3 class="timeline-list-title">Machine Learning Research Intern @ Stanford PiMED Lab</h3>
             <div class="timeline-list-description">
@@ -891,6 +1103,7 @@
               <p>- Applied and developed novel Machine Learning approaches to MRI histopathology images under Dr. Mirabela Rusu</p>
               <p>- Enhanced model accuracy for cancer detection through advanced preprocessing techniques</p>
               <p>- Published abstract in Biomedical Engineering Society (BMES) Annual Journal</p>
+            </div>
             </div>
           </div>
         </div>
@@ -1172,15 +1385,19 @@
         </div>
       </div>
     </section>
-    <!-- SKILLS -->
+<!-- SKILLS -->
 <section id="skills">
   <div class="section-header">
     <h2 class="section-title">Skills</h2>
   </div>
 
-  <div class="pill-grid">
-    <div class="pill-card">
-      <div class="pill-title">Languages</div>
+  <div class="skill-grid">
+    <!-- Languages -->
+    <div class="skill-box">
+      <div class="skill-box-top">
+        <div class="skill-box-title">Languages</div>
+        <div class="skill-box-meta">core</div>
+      </div>
       <div class="pill-list">
         <span class="pill">Python</span>
         <span class="pill">Java</span>
@@ -1192,8 +1409,12 @@
       </div>
     </div>
 
-    <div class="pill-card">
-      <div class="pill-title">Frameworks</div>
+    <!-- Frameworks -->
+    <div class="skill-box">
+      <div class="skill-box-top">
+        <div class="skill-box-title">Frameworks</div>
+        <div class="skill-box-meta">ship</div>
+      </div>
       <div class="pill-list">
         <span class="pill">React</span>
         <span class="pill">Node.js</span>
@@ -1202,8 +1423,12 @@
       </div>
     </div>
 
-    <div class="pill-card">
-      <div class="pill-title">Machine Learning</div>
+    <!-- ML -->
+    <div class="skill-box">
+      <div class="skill-box-top">
+        <div class="skill-box-title">Machine Learning</div>
+        <div class="skill-box-meta">research</div>
+      </div>
       <div class="pill-list">
         <span class="pill">PyTorch</span>
         <span class="pill">TensorFlow</span>
@@ -1211,13 +1436,17 @@
         <span class="pill">NumPy</span>
         <span class="pill">Pandas</span>
         <span class="pill">spaCy</span>
-        <span class="pill">Sci-kit Learn</span>
+        <span class="pill">Scikit-learn</span>
         <span class="pill">OpenCV</span>
       </div>
     </div>
 
-    <div class="pill-card">
-      <div class="pill-title">Cloud / Infra</div>
+    <!-- Cloud / Infra -->
+    <div class="skill-box">
+      <div class="skill-box-top">
+        <div class="skill-box-title">Cloud / Infra</div>
+        <div class="skill-box-meta">aws</div>
+      </div>
       <div class="pill-list">
         <span class="pill">Bedrock</span>
         <span class="pill">S3</span>
@@ -1225,32 +1454,36 @@
         <span class="pill">Glue</span>
         <span class="pill">Athena</span>
         <span class="pill">Clean Rooms</span>
-        <span class="pill">Dynamo DB</span>
+        <span class="pill">DynamoDB</span>
       </div>
     </div>
 
+    <!-- Coursework -->
+    <div class="skill-box skill-box-wide">
+      <div class="skill-box-top">
+        <div class="skill-box-title">Online Coursework / Certifications</div>
+        <div class="skill-box-meta">proof</div>
+      </div>
 
-        <div class="pill-card">
-      <div class="pill-title">Online Coursework/Certifications</div>
       <div class="pill-list">
-<a href="https://www.udacity.com/course/deep-learning-nanodegree--nd101" target="_blank">
-  <span class="pill">Deep Learning Nanodegree @ Udacity</span>
-</a>
+        <a class="pill-link" href="https://www.udacity.com/course/deep-learning-nanodegree--nd101" target="_blank" rel="noopener">
+          <span class="pill pill-cta">Deep Learning Nanodegree @ Udacity</span>
+        </a>
 
-<a href="https://www.coursera.org/google-certificates/cybersecurity-certificate" target="_blank">
-  <span class="pill">Google Cybersecurity Certificate @ Coursera</span>
-</a>
+        <a class="pill-link" href="https://www.coursera.org/google-certificates/cybersecurity-certificate" target="_blank" rel="noopener">
+          <span class="pill pill-cta">Google Cybersecurity Certificate @ Coursera</span>
+        </a>
 
-<a href="https://www.udacity.com/course/intro-to-machine-learning--ud120" target="_blank">
-  <span class="pill">Machine Learning Course @ Udacity</span>
-</a>
+        <a class="pill-link" href="https://www.udacity.com/course/intro-to-machine-learning--ud120" target="_blank" rel="noopener">
+          <span class="pill pill-cta">Intro to Machine Learning @ Udacity</span>
+        </a>
 
-  <span class="pill">Andrew Ng Machine Learning Course</span>
-
+        <span class="pill pill-cta">Andrew Ng Machine Learning Course</span>
       </div>
     </div>
   </div>
 </section>
+
 
 
     <!-- CONTACT -->
@@ -1267,7 +1500,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2025, Sachi Parikh</p>
+    <p>&copy; 2026, Sachi Parikh</p>
   </footer>
 </body>
 </html>
