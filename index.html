@@ -3,1024 +3,763 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sachi Parikh — Portfolio</title>
+  <title>Sachi Parikh - Software Engineer</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* ===========================
-         BLUE / BLACK / SILVER THEME
-         =========================== */
+      /* Core palette: blue / black / silver */
+      --bg0: #070a12;
+      --bg1: #0b1020;
+      --panel: rgba(10, 14, 25, 0.70);
+      --panel2: rgba(12, 18, 34, 0.72);
 
-      --bg-0: #04060b;
-      --bg-1: #060915;
+      --ink: rgba(230, 240, 255, 0.92);
+      --muted: rgba(165, 185, 215, 0.78);
 
-      --panel-0: rgba(10, 14, 24, 0.74);
-      --panel-1: rgba(14, 18, 32, 0.78);
+      --line: rgba(170, 200, 255, 0.18);
+      --line2: rgba(200, 220, 255, 0.08);
 
-      --edge: rgba(160, 190, 255, 0.18);
-      --edge2: rgba(200, 220, 255, 0.10);
+      --glow: rgba(120, 160, 255, 0.28);
+      --glow2: rgba(180, 210, 255, 0.18);
 
-      --crt: rgba(200, 220, 255, 0.92);   /* primary terminal text (icy) */
-      --cyan: rgba(150, 200, 255, 0.95);  /* electric blue */
-      --steel: rgba(210, 220, 235, 0.92); /* silver */
-      --ice: rgba(235, 245, 255, 0.96);   /* near white */
+      --accent: rgba(170, 200, 255, 0.92);
+      --accentSoft: rgba(170, 200, 255, 0.20);
 
-      --text: rgba(235, 245, 255, 0.92);
-      --muted: rgba(235, 245, 255, 0.72);
-      --muter: rgba(235, 245, 255, 0.55);
-
-      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --body: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --display: "Playfair Display", Georgia, serif;
-
-      --r-lg: 18px;
-      --r-md: 14px;
-      --r-sm: 10px;
-
-      --shadow: 0 24px 60px rgba(0,0,0,0.60);
-      --shadow2: 0 16px 40px rgba(0,0,0,0.52);
-
-      /* Asset paths */
-      --bg-texture: url("images/bg-texture.png");
-      --scanlines: url("images/scanlines.png");
-      --hero-art: url("images/hero-art.png");
-
-      --icon-sp: url("images/icons/sp-logo.svg");
-      --icon-launch: url("images/icons/launch.svg");
-      --icon-copy: url("images/icons/copy.svg");
-      --icon-terminal: url("images/icons/terminal.svg");
+      --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      --serif: "Playfair Display", serif;
     }
 
-    *{box-sizing:border-box; margin:0; padding:0;}
-    html{scroll-behavior:smooth;}
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    html{ scroll-behavior:smooth; }
+
     body{
-      /* Layered background: gradients + your texture */
-      background:
-        radial-gradient(1100px 680px at 22% -10%, rgba(150,200,255,0.10), transparent 55%),
-        radial-gradient(1200px 700px at 78% 0%, rgba(210,220,235,0.08), transparent 58%),
-        radial-gradient(900px 700px at 50% 120%, rgba(120,160,255,0.07), transparent 58%),
-        linear-gradient(180deg, var(--bg-0), var(--bg-1)),
-        var(--bg-texture);
-      background-blend-mode: screen, screen, screen, normal, normal;
-      background-size: auto, auto, auto, auto, cover;
-      background-position: center, center, center, center, center;
-      background-repeat: no-repeat;
-
-      color: var(--text);
-      font-family: var(--body);
-      line-height: 1.65;
+      font-family: var(--sans);
+      color: var(--ink);
+      line-height: 1.7;
       overflow-x: hidden;
+      background: radial-gradient(1200px 800px at 20% 20%, rgba(120,160,255,0.12), transparent 55%),
+                  radial-gradient(1000px 700px at 80% 70%, rgba(180,210,255,0.08), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg0));
     }
 
-    /* ===========================
-       SCANLINES OVERLAY (image)
-       =========================== */
-    .fx-scanlines::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image: var(--scanlines);
+    /* --- Background layers wired to your generated assets --- */
+    .bg-texture,
+    .scanlines{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* IMPORTANT: put your generated file here */
+    .bg-texture{
+      background-image: url("images/bg-texture.png");
       background-size: cover;
       background-position: center;
-      opacity: 0.22;
-      mix-blend-mode: overlay;
-      z-index: 9999;
+      opacity: 0.22; /* keep subtle */
+      filter: saturate(1.05) contrast(1.05);
     }
 
-    /* extra soft grain fallback (pure CSS, no extra asset needed) */
-    .fx-scanlines::after{
+    /* IMPORTANT: put your generated file here */
+    .scanlines{
+      background-image: url("images/scanlines.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.10;
+      mix-blend-mode: screen;
+    }
+
+    /* subtle vignette + dust */
+    body::before{
       content:"";
-      position:fixed; inset:0;
+      position: fixed;
+      inset:0;
+      z-index:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06), transparent 28%),
-        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05), transparent 32%),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.010), rgba(255,255,255,0.010) 1px, transparent 3px, transparent 6px);
-      opacity: 0.10;
-      z-index: 9998;
+        radial-gradient(1200px 900px at 50% 0%, rgba(220,240,255,0.06), transparent 55%),
+        radial-gradient(1000px 700px at 50% 120%, rgba(0,0,0,0.65), rgba(0,0,0,0.92));
+      opacity: 0.75;
     }
 
-    @media (prefers-reduced-motion: reduce){
-      html{scroll-behavior:auto;}
-      .typing-caret{animation:none !important;}
-    }
+    ::selection{ background: rgba(140, 180, 255, 0.35); color: white; }
 
-    a{color:inherit; text-decoration:none;}
-    .wrap{max-width: 1200px; margin: 0 auto; padding: 0 22px;}
+    /* Layout container */
+    .container{ position: relative; z-index: 1; padding-top: 5.5rem; }
 
-    /* ===========================
-       HEADER
-       =========================== */
+    /* Header */
     header{
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 1000;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(4,6,11,0.88), rgba(4,6,11,0.62));
-      border-bottom: 1px solid rgba(160,190,255,0.14);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 16px;
-      padding: 14px 0;
-    }
-    .brand{
-      display:flex; align-items:center; gap: 10px;
-      min-width: 180px;
-    }
-
-    /* SP badge now uses your svg */
-    .badge{
-      width: 46px; height: 34px;
-      border-radius: 10px;
-      background:
-        radial-gradient(140% 130% at 30% 20%, rgba(150,200,255,0.22), rgba(0,0,0,0.0) 55%),
-        linear-gradient(180deg, rgba(20,26,46,0.92), rgba(8,10,18,0.92));
-      border: 1px solid rgba(160,190,255,0.20);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
-      display:grid; place-items:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .badge img{
-      width: 26px;
-      height: 26px;
-      display:block;
-      opacity: 0.95;
-      filter: drop-shadow(0 0 10px rgba(150,200,255,0.35));
-    }
-
-    .lights{
-      display:flex; gap: 6px;
-      margin-left: 10px;
-      opacity: 0.95;
-    }
-    .light{width:8px; height:8px; border-radius:50%;}
-    .light.red{background:#b9c7ff; box-shadow: 0 0 10px rgba(185,199,255,0.26);}
-    .light.ylw{background:#e9f1ff; box-shadow: 0 0 10px rgba(233,241,255,0.22);}
-    .light.grn{background:#7fb2ff; box-shadow: 0 0 12px rgba(127,178,255,0.28);}
-
-    .navlinks{
-      display:flex; align-items:center; gap: 18px;
-      flex-wrap: wrap;
-      justify-content:center;
-    }
-    .navlinks a{
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(235,245,255,0.74);
-      padding: 10px 10px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      transition: transform .18s ease, border-color .18s ease, color .18s ease, background .18s ease;
-      position:relative;
-    }
-    .navlinks a:hover{
-      transform: translateY(-1px);
-      color: rgba(235,245,255,0.95);
-      border-color: rgba(160,190,255,0.18);
-      background: rgba(160,190,255,0.06);
-    }
-
-    .nav-right{
-      min-width: 180px;
+      position: fixed;
+      top:0;
+      width:100%;
+      padding: 1.05rem 3rem;
       display:flex;
-      justify-content:flex-end;
-      gap: 10px;
+      justify-content:space-between;
       align-items:center;
+      z-index: 1000;
+
+      background: rgba(8, 10, 16, 0.60);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line2);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
     }
-    .status-pill{
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 0.85rem;
+      text-decoration:none;
+    }
+
+    .brand img{
+      width: 34px;
+      height: 34px;
+      filter: drop-shadow(0 0 10px rgba(120,160,255,0.35));
+    }
+
+    .brand span{
       font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(200,220,255,0.92);
-      border: 1px solid rgba(160,190,255,0.18);
-      background: rgba(160,190,255,0.06);
-      padding: 8px 10px;
-      border-radius: 999px;
+      letter-spacing: 0.16em;
+      font-size: 0.92rem;
+      color: rgba(220, 235, 255, 0.9);
+      text-transform: uppercase;
+    }
+
+    nav{
+      display:flex;
+      gap: 1.6rem;
+      align-items:center;
+      font-family: var(--mono);
+      font-size: 0.86rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    /* ===========================
-       HERO
-       =========================== */
-    main{padding-top: 86px;}
-    .hero{
-      position:relative;
-      padding: 28px 0 22px;
+    nav a{
+      color: rgba(190,210,245,0.78);
+      text-decoration:none;
+      position: relative;
+      padding: 0.35rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.22s ease;
     }
 
-    .heroShell{
-      border-radius: var(--r-lg);
-      border: 1px solid rgba(160,190,255,0.16);
-      background:
-        radial-gradient(900px 320px at 20% 0%, rgba(150,200,255,0.10), transparent 60%),
-        radial-gradient(900px 320px at 90% 20%, rgba(210,220,235,0.09), transparent 60%),
-        linear-gradient(180deg, rgba(12, 16, 28, 0.74), rgba(8, 10, 18, 0.72));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
+    nav a:hover{
+      color: rgba(235,245,255,0.95);
+      border-color: rgba(170,200,255,0.18);
+      background: rgba(20,30,55,0.32);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 18px rgba(120,160,255,0.12);
     }
 
-    .heroGrid{
+    /* Hero */
+    section{ padding: 4rem 4rem; position: relative; }
+
+    .hero-about{
+      min-height: 92vh;
       display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      padding: 22px;
-      align-items:stretch;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+      padding: 3.5rem 4rem 2.5rem;
+      align-items: center;
     }
 
-    /* Surreal backdrop layer now uses your hero art */
-    .surreal{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(800px 520px at 72% 18%, rgba(150,200,255,0.16), transparent 62%),
-        radial-gradient(680px 520px at 90% 10%, rgba(210,220,235,0.12), transparent 60%),
-        linear-gradient(90deg, rgba(0,0,0,0.42), rgba(0,0,0,0.12) 40%, rgba(0,0,0,0.52));
-      pointer-events:none;
-      z-index:0;
+    /* Terminal panel styling */
+    .terminal-panel{
+      background: linear-gradient(180deg, rgba(12,18,34,0.78), rgba(8,10,16,0.60));
+      border: 1px solid rgba(170,200,255,0.18);
+      border-radius: 16px;
+      padding: 1.6rem 1.6rem 1.25rem;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.04),
+        0 0 45px rgba(120,160,255,0.10),
+        0 20px 50px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
     }
-    .surreal::after{
+
+    .terminal-panel::before{
       content:"";
       position:absolute;
-      right:-6%;
-      top:-8%;
-      width: 60%;
-      height: 78%;
-
-      /* hero art image */
-      background: var(--hero-art) right top / cover no-repeat;
-
-      opacity: 0.22;
-      filter: blur(1.1px) saturate(1.06) contrast(1.05);
-      mix-blend-mode: screen;
-      transform: translateZ(0);
-    }
-
-    /* ===========================
-       TERMINAL CARD
-       =========================== */
-    .terminal{
-      position:relative;
-      border-radius: 16px;
+      inset:-2px;
       background:
-        radial-gradient(900px 260px at 25% 15%, rgba(150,200,255,0.12), transparent 62%),
-        radial-gradient(700px 260px at 80% 10%, rgba(210,220,235,0.08), transparent 60%),
-        linear-gradient(180deg, rgba(16, 20, 34, 0.74), rgba(10, 12, 20, 0.80));
-      border: 1px solid rgba(160,190,255,0.16);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-      padding: 0;
-      z-index: 1;
-    }
-
-    .termTop{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 10px;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(160,190,255,0.10);
-      background: linear-gradient(180deg, rgba(6,8,14,0.74), rgba(6,8,14,0.38));
-    }
-
-    .termTitle{
-      display:flex; align-items:center; gap: 10px;
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(200,220,255,0.86);
-    }
-    .termTitle::before{
-      content:"";
-      width: 16px;
-      height: 14px;
-      background: var(--icon-terminal) center/contain no-repeat;
-      opacity: 0.9;
-      filter: drop-shadow(0 0 8px rgba(150,200,255,0.25));
-    }
-
-    .termBtns{
-      display:flex; gap: 8px; align-items:center;
-      opacity: 0.96;
-    }
-
-    .chipBtn{
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      padding: 6px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(235,245,255,0.12);
-      color: rgba(235,245,255,0.72);
-      background: rgba(255,255,255,0.02);
-      transition: border-color .18s ease, color .18s ease, transform .18s ease, background .18s ease;
-      cursor:pointer;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .chipBtn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(160,190,255,0.18);
-      color: rgba(235,245,255,0.95);
-      background: rgba(160,190,255,0.06);
-    }
-
-    .termBody{
-      padding: 16px 16px 14px;
-      font-family: var(--mono);
-      color: var(--crt);
-      text-shadow: 0 0 18px rgba(150,200,255,0.12);
-      position:relative;
-    }
-
-    .termName{
-      display:flex; gap: 10px; align-items:baseline;
-      margin-bottom: 8px;
-    }
-    .termName .tag{
-      font-size: 11px;
-      letter-spacing: 0.10em;
-      padding: 4px 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(160,190,255,0.18);
-      background: rgba(160,190,255,0.06);
-      color: rgba(235,245,255,0.88);
-    }
-    .termName h1{
-      font-family: var(--display);
-      font-size: 54px;
-      line-height: 1.02;
-      letter-spacing: -0.02em;
-      margin: 0;
-      color: rgba(235,245,255,0.96);
-      text-shadow: 0 0 22px rgba(150,200,255,0.10);
-    }
-
-    .termLines{
-      margin-top: 10px;
-      color: rgba(200,220,255,0.84);
-      font-size: 13px;
-      line-height: 1.9;
-    }
-    .termLines .prompt{color: rgba(235,245,255,0.92);}
-
-    .typing-caret{
-      display:inline-block;
-      width: 8px;
-      height: 14px;
-      margin-left: 6px;
-      background: rgba(235,245,255,0.82);
-      box-shadow: 0 0 14px rgba(150,200,255,0.22);
-      transform: translateY(2px);
-      animation: blink 1.1s steps(2, end) infinite;
-    }
-    @keyframes blink{50%{opacity:0.0}}
-
-    .termKeys{
-      margin-top: 14px;
-      display:flex; gap: 10px; flex-wrap:wrap;
-      opacity: 0.95;
-    }
-    .key{
-      border: 1px solid rgba(160,190,255,0.16);
-      background: rgba(160,190,255,0.06);
-      color: rgba(235,245,255,0.86);
-      font-size: 11px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      letter-spacing: 0.08em;
-    }
-
-    /* ===========================
-       BIO PANE
-       =========================== */
-    .bio{
-      position:relative;
-      border-radius: 16px;
-      border: 1px solid rgba(160,190,255,0.12);
-      background:
-        radial-gradient(700px 320px at 45% -10%, rgba(150,200,255,0.12), transparent 62%),
-        radial-gradient(540px 320px at 100% 10%, rgba(210,220,235,0.10), transparent 64%),
-        linear-gradient(180deg, rgba(12, 16, 28, 0.66), rgba(8, 10, 18, 0.74));
-      box-shadow: var(--shadow2);
-      padding: 18px 18px 16px;
-      z-index: 1;
-      overflow:hidden;
-    }
-    .bio h2{
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(200,220,255,0.88);
-      margin-bottom: 10px;
-    }
-    .bio p{
-      color: rgba(235,245,255,0.74);
-      font-size: 14.5px;
-      line-height: 1.85;
-      margin-bottom: 12px;
-    }
-    .hl{color: rgba(235,245,255,0.96);}
-    .hl2{color: rgba(150,200,255,0.95);}
-
-    .ctaRow{
-      margin-top: 14px;
-      display:flex; flex-wrap:wrap; gap: 10px;
-    }
-    .btn{
-      display:inline-flex; align-items:center; gap: 10px;
-      font-family: var(--mono);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-size: 11px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(235,245,255,0.12);
-      background: rgba(255,255,255,0.02);
-      color: rgba(235,245,255,0.78);
-      transition: transform .18s ease, border-color .18s ease, color .18s ease, background .18s ease;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(160,190,255,0.16);
-      background: rgba(160,190,255,0.06);
-      color: rgba(235,245,255,0.95);
-    }
-
-    .chips{
-      margin-top: 12px;
-      display:flex; flex-wrap:wrap; gap: 8px;
-    }
-    .chip{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(235,245,255,0.78);
-      border: 1px solid rgba(235,245,255,0.10);
-      background: rgba(255,255,255,0.02);
-      padding: 7px 10px;
-      border-radius: 999px;
-    }
-    .chip.green{border-color: rgba(160,190,255,0.18); color: rgba(235,245,255,0.90); background: rgba(160,190,255,0.06);}
-    .chip.cyan{border-color: rgba(150,200,255,0.20); color: rgba(150,200,255,0.95); background: rgba(150,200,255,0.06);}
-    .chip.violet{border-color: rgba(210,220,235,0.16); color: rgba(210,220,235,0.95); background: rgba(210,220,235,0.06);}
-
-    /* ===========================
-       SECTION HEADERS
-       =========================== */
-    section{padding: 20px 0 30px;}
-    .sectionHdr{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      margin: 18px 0 14px;
-    }
-    .sectionHdr h3{
-      font-family: var(--mono);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(200,220,255,0.88);
-    }
-    .divider{
-      height: 1px;
-      flex:1;
-      background: linear-gradient(90deg, rgba(160,190,255,0.25), rgba(200,220,255,0.12), transparent);
-      opacity: 0.85;
-      margin-left: 12px;
-      border-radius: 999px;
-    }
-
-    /* ===========================
-       TIMELINE CARDS
-       =========================== */
-    .list{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-    }
-    .row{
-      display:grid;
-      grid-template-columns: 72px 1fr;
-      gap: 14px;
-      align-items:stretch;
-      background: var(--panel-0);
-      border: 1px solid rgba(160,190,255,0.10);
-      border-radius: 16px;
-      overflow:hidden;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.38);
-    }
-    .logoBox{
-      display:grid;
-      place-items:center;
-      border-right: 1px solid rgba(235,245,255,0.06);
-      background:
-        radial-gradient(120px 120px at 30% 20%, rgba(150,200,255,0.16), transparent 62%),
-        linear-gradient(180deg, rgba(18, 22, 38, 0.72), rgba(8, 10, 18, 0.72));
-    }
-    .logoImg{
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      border: 1px solid rgba(235,245,255,0.10);
-      background: rgba(255,255,255,0.02);
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-    }
-    .logoFallback{
-      font-family: var(--mono);
-      font-size: 14px;
-      letter-spacing: 0.12em;
-      color: rgba(200,220,255,0.88);
-      text-shadow: 0 0 14px rgba(150,200,255,0.18);
-    }
-
-    .rowBody{ padding: 14px 14px 14px; }
-    .meta{
-      display:flex; flex-wrap:wrap; align-items:center; gap: 10px;
-      justify-content:space-between;
-      margin-bottom: 6px;
-    }
-    .dates{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(150,200,255,0.86);
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-    }
-
-    .miniBtns{display:flex; gap: 8px; align-items:center;}
-    .miniBtn{
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 7px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(235,245,255,0.10);
-      background: rgba(255,255,255,0.02);
-      color: rgba(235,245,255,0.70);
-      cursor:pointer;
-      transition: transform .18s ease, border-color .18s ease, color .18s ease, background .18s ease;
-      user-select:none;
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-    }
-    /* add the copy icon to COPY buttons */
-    button.miniBtn[data-copy]::before{
-      content:"";
-      width: 14px;
-      height: 14px;
-      background: var(--icon-copy) center/contain no-repeat;
-      opacity: 0.85;
-      filter: drop-shadow(0 0 10px rgba(150,200,255,0.18));
-    }
-    .miniBtn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(160,190,255,0.16);
-      background: rgba(160,190,255,0.06);
-      color: rgba(235,245,255,0.92);
-    }
-
-    .titleLine{
-      display:flex; align-items:baseline; gap: 10px; flex-wrap:wrap;
-      margin-bottom: 6px;
-    }
-    .titleLine h4{
-      font-family: var(--display);
-      font-size: 20px;
-      letter-spacing: -0.02em;
-      color: rgba(235,245,255,0.95);
-      margin:0;
-    }
-    .sub{
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.10em;
-      color: rgba(210,220,235,0.92);
-      text-transform: uppercase;
-    }
-    .desc{
-      color: rgba(235,245,255,0.70);
-      font-size: 13.5px;
-      line-height: 1.8;
-    }
-    .desc ul{margin: 10px 0 0 18px;}
-    .desc li{margin: 7px 0;}
-
-    /* ===========================
-       PROJECTS GRID
-       =========================== */
-    .projectsHdr{
-      margin-top: 18px;
-      border-radius: var(--r-lg);
-      border: 1px solid rgba(160,190,255,0.12);
-      background: linear-gradient(180deg, rgba(12, 16, 28, 0.66), rgba(8, 10, 18, 0.74));
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    .projectsTop{
-      display:flex; align-items:center; justify-content:space-between; gap: 10px;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(235,245,255,0.06);
-    }
-    .projectsTop .label{
-      font-family: var(--mono);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(200,220,255,0.88);
-    }
-    .projectsTop .hint{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(235,245,255,0.60);
-      letter-spacing: 0.08em;
-    }
-    .projGrid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      padding: 12px;
-    }
-    .projCard{
-      position:relative;
-      border-radius: 16px;
-      overflow:hidden;
-      border: 1px solid rgba(235,245,255,0.08);
-      background:
-        radial-gradient(420px 200px at 25% 20%, rgba(150,200,255,0.10), transparent 60%),
-        radial-gradient(420px 200px at 85% 15%, rgba(210,220,235,0.09), transparent 60%),
-        linear-gradient(180deg, rgba(16, 20, 34, 0.64), rgba(8, 10, 18, 0.78));
-      box-shadow: 0 12px 28px rgba(0,0,0,0.42);
-      padding: 14px 14px 12px;
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-      cursor:pointer;
-      min-height: 210px;
-      display:flex;
-      flex-direction:column;
-    }
-    .projCard:hover{
-      transform: translateY(-2px);
-      border-color: rgba(160,190,255,0.18);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.50);
-    }
-    .projCard::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        repeating-linear-gradient(to bottom, rgba(235,245,255,0.05), rgba(235,245,255,0.015) 2px, transparent 6px);
-      opacity: 0.06;
+        linear-gradient(90deg, transparent, rgba(170,200,255,0.10), transparent);
+      opacity: 0.55;
+      transform: translateX(-60%);
+      animation: sweep 6.8s ease-in-out infinite;
       pointer-events:none;
     }
-    .projTitle{
-      font-family: var(--display);
-      font-size: 20px;
-      color: rgba(235,245,255,0.95);
-      margin-bottom: 8px;
+
+    @keyframes sweep{
+      0%{ transform: translateX(-70%); opacity: 0.0; }
+      10%{ opacity: 0.55; }
+      50%{ opacity: 0.20; }
+      100%{ transform: translateX(70%); opacity: 0.0; }
     }
-    .projDesc{
-      color: rgba(235,245,255,0.70);
-      font-size: 13px;
-      line-height: 1.75;
-      margin-bottom: 10px;
-      max-width: 55ch;
+
+    .terminal-top{
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-    .tagRow{display:flex; flex-wrap:wrap; gap: 8px; margin-bottom: 12px;}
-    .tag{
+
+    .terminal-dots{
+      display:flex;
+      gap: 0.4rem;
+      opacity: 0.8;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(170,200,255,0.55);
+      box-shadow: 0 0 12px rgba(120,160,255,0.25);
+    }
+    .dot:nth-child(2){ opacity: 0.55; }
+    .dot:nth-child(3){ opacity: 0.35; }
+
+    .terminal-title{
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: rgba(200,220,255,0.80);
+      text-transform: uppercase;
+    }
+
+    .hero-name{
+      font-family: var(--serif);
+      font-size: 4.1rem;
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+      color: rgba(235,245,255,0.94);
+      text-shadow: 0 0 22px rgba(120,160,255,0.20);
+    }
+
+    .hero-lines{
+      font-family: var(--mono);
+      color: rgba(200,220,255,0.82);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-top: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-lines .prompt{
+      color: rgba(170,200,255,0.95);
+      margin-right: 0.45rem;
+    }
+
+    .cta-row{
+      display:flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .key-btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 0.55rem;
+      padding: 0.65rem 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      color: rgba(230,240,255,0.92);
+      text-decoration:none;
+      border-radius: 12px;
+      border: 1px solid rgba(170,200,255,0.22);
+      background: rgba(12,18,34,0.45);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 0 18px rgba(120,160,255,0.10);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .key-btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(170,200,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 0 28px rgba(120,160,255,0.14);
+    }
+
+    .keycap{
+      padding: 0.1rem 0.35rem;
+      border-radius: 8px;
+      border: 1px solid rgba(170,200,255,0.25);
+      background: rgba(8,10,16,0.45);
+      color: rgba(200,220,255,0.90);
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    .key-btn img{
+      width: 16px; height: 16px;
+      filter: drop-shadow(0 0 8px rgba(120,160,255,0.28));
+    }
+
+    /* Right hero art */
+    .hero-art{
+      position: relative;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(170,200,255,0.16);
+      background: rgba(10, 14, 25, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 25px 70px rgba(0,0,0,0.55);
+      min-height: 520px;
+    }
+
+    .hero-art::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(800px 520px at 40% 20%, rgba(180,210,255,0.18), transparent 55%),
+                  linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.55));
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .hero-art img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      filter: contrast(1.05) saturate(1.02);
+      display:block;
+    }
+
+    /* About text panel */
+    .about-panel{
+      margin-top: 1.15rem;
+      background: rgba(10, 14, 25, 0.55);
+      border: 1px solid rgba(170,200,255,0.14);
+      border-radius: 16px;
+      padding: 1.35rem 1.45rem;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .about-panel p{ color: rgba(175,195,225,0.85); margin-bottom: 1rem; }
+    .about-panel p:last-child{ margin-bottom: 0; }
+
+    .highlight{
+      color: rgba(230,240,255,0.95);
+      text-shadow: 0 0 10px rgba(120,160,255,0.12);
+      font-weight: 700;
+    }
+    .highlight-blue{
+      color: rgba(170,200,255,0.95);
+      font-weight: 700;
+    }
+
+    /* Section headings */
+    .section-header{ margin-bottom: 2.2rem; }
+    .section-title{
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 1.25rem;
+      color: rgba(220,235,255,0.92);
+      display:flex;
+      align-items:center;
+      gap: 0.6rem;
+    }
+    .section-title::before{
+      content:"";
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(170,200,255,0.55);
+      box-shadow: 0 0 16px rgba(120,160,255,0.22);
+      background: rgba(170,200,255,0.10);
+    }
+
+    /* Timeline */
+    #education, #experience, #contact{
+      background: rgba(8,10,16,0.45);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .timeline-list{
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-list::before{
+      content:"";
+      position:absolute;
+      left: 20px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(170,200,255,0.28), rgba(170,200,255,0.08));
+      opacity: 0.8;
+    }
+
+    .timeline-list-item{
+      display:grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.4rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .timeline-node{
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      position: relative;
+      top: 6px;
+      left: 13px;
+      background: rgba(170,200,255,0.80);
+      border: 3px solid rgba(8,10,16,0.85);
+      box-shadow: 0 0 0 2px rgba(170,200,255,0.25), 0 0 18px rgba(120,160,255,0.18);
+      z-index: 2;
+    }
+
+    .timeline-list-content{
+      padding: 1.2rem 1.3rem;
+      border-radius: 16px;
+      background: rgba(12,18,34,0.55);
+      border: 1px solid rgba(170,200,255,0.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .timeline-list-dates{
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: rgba(170,200,255,0.88);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(235,245,255,0.10);
-      color: rgba(235,245,255,0.74);
-      background: rgba(255,255,255,0.02);
-    }
-    .tag.g{border-color: rgba(160,190,255,0.18); color: rgba(235,245,255,0.90); background: rgba(160,190,255,0.06);}
-    .tag.c{border-color: rgba(150,200,255,0.20); color: rgba(150,200,255,0.95); background: rgba(150,200,255,0.06);}
-    .tag.v{border-color: rgba(210,220,235,0.16); color: rgba(210,220,235,0.95); background: rgba(210,220,235,0.06);}
-
-    .launchRow{
-      display:flex; justify-content:space-between; align-items:center; gap: 10px;
-      margin-top: auto;
+      margin-bottom: 0.5rem;
     }
 
-    /* Launch button now uses your launch.svg */
-    .launchBtn{
-      display:inline-flex; align-items:center; gap: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(160,190,255,0.22);
-      background: rgba(160,190,255,0.08);
-      color: rgba(235,245,255,0.92);
-      transition: transform .18s ease, background .18s ease;
+    .timeline-list-title{
+      font-size: 1.25rem;
+      color: rgba(235,245,255,0.94);
+      margin-bottom: 0.25rem;
     }
-    .launchBtn::after{
-      content:"";
-      width: 16px;
-      height: 16px;
-      background: var(--icon-launch) center/contain no-repeat;
-      opacity: 0.9;
-      filter: drop-shadow(0 0 10px rgba(150,200,255,0.20));
-    }
-    .launchBtn:hover{
-      transform: translateY(-1px);
-      background: rgba(160,190,255,0.12);
-    }
-    /* keep your old arrow span harmless */
-    .arrow{display:none;}
 
-    /* ===========================
-       SKILLS + COURSEWORK
-       =========================== */
-    .twoCol{
+    .timeline-list-org{
+      font-size: 1rem;
+      color: rgba(200,220,255,0.82);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .timeline-list-description p{ color: rgba(175,195,225,0.82); }
+
+    /* Projects grid */
+    .projects-grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.6rem;
     }
-    .panel{
+
+    .project-card{
+      background: rgba(12,18,34,0.58);
       border-radius: 16px;
-      border: 1px solid rgba(235,245,255,0.08);
-      background: linear-gradient(180deg, rgba(12, 16, 28, 0.66), rgba(8, 10, 18, 0.74));
-      box-shadow: 0 12px 28px rgba(0,0,0,0.40);
-      padding: 14px 14px 12px;
       overflow:hidden;
-    }
-    .panelTitle{
-      font-family: var(--mono);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(200,220,255,0.88);
-      margin-bottom: 10px;
-      display:flex; align-items:center; gap: 10px;
+      border: 1px solid rgba(170,200,255,0.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 40px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .tabs{display:flex; flex-wrap:wrap; gap: 8px; margin-bottom: 12px;}
-    .tab{
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 7px 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(235,245,255,0.10);
-      background: rgba(255,255,255,0.02);
-      color: rgba(235,245,255,0.70);
-      cursor:pointer;
+    .project-card:hover{
+      transform: translateY(-6px);
+      border-color: rgba(170,200,255,0.22);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 20px 60px rgba(0,0,0,0.42);
     }
-    .tab.active{
-      border-color: rgba(160,190,255,0.22);
-      background: rgba(160,190,255,0.06);
-      color: rgba(235,245,255,0.92);
+
+    .project-image{
+      width:100%;
+      height: 190px;
+      background:
+        radial-gradient(500px 220px at 20% 20%, rgba(170,200,255,0.22), transparent 55%),
+        linear-gradient(135deg, rgba(20,30,55,0.65), rgba(8,10,16,0.85));
+      border-bottom: 1px solid rgba(170,200,255,0.10);
+      position: relative;
+      overflow:hidden;
     }
-    .skillChips{display:flex; flex-wrap:wrap; gap: 8px;}
-    .skillChip{
+
+    .project-image::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,0.45));
+      pointer-events:none;
+    }
+
+    .project-content{ padding: 1.35rem 1.35rem 1.45rem; }
+
+    .project-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-title{
+      font-size: 1.18rem;
+      color: rgba(235,245,255,0.94);
+    }
+
+    .project-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid rgba(170,200,255,0.20);
+      background: rgba(8,10,16,0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      text-decoration:none;
+    }
+
+    .project-link:hover{
+      transform: rotate(10deg) scale(1.02);
+      border-color: rgba(170,200,255,0.32);
+    }
+
+    .project-link img{ width: 16px; height: 16px; }
+
+    .project-description{
+      color: rgba(175,195,225,0.82);
+      margin-bottom: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Tech tags (re-tinted to match theme) */
+    .tech-tags{ display:flex; flex-wrap:wrap; gap: 0.45rem; }
+
+    .tech-tag{
       font-family: var(--mono);
-      font-size: 11px;
-      padding: 7px 10px;
+      font-size: 0.72rem;
+      padding: 0.32rem 0.7rem;
       border-radius: 999px;
-      border: 1px solid rgba(235,245,255,0.10);
-      background: rgba(255,255,255,0.02);
-      color: rgba(235,245,255,0.74);
+      border: 1px solid rgba(170,200,255,0.18);
+      background: rgba(8,10,16,0.28);
+      color: rgba(200,220,255,0.82);
     }
 
-    .folders{display:flex; flex-direction:column; gap: 10px;}
-    details{
-      border-radius: 14px;
-      border: 1px solid rgba(235,245,255,0.08);
-      background: rgba(255,255,255,0.02);
-      overflow:hidden;
+    /* Publications */
+    .publications-container{
+      display:flex;
+      gap: 1.4rem;
+      overflow-x:auto;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
     }
-    summary{
-      cursor:pointer;
-      list-style:none;
+    .publication-card{
+      min-width: 360px;
+      background: rgba(12,18,34,0.58);
+      padding: 1.4rem;
+      border-radius: 16px;
+      border: 1px solid rgba(170,200,255,0.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 40px rgba(0,0,0,0.35);
+      scroll-snap-align:start;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .publication-card:hover{ transform: translateY(-6px); border-color: rgba(170,200,255,0.22); }
+    .publication-title{ font-size: 1.1rem; margin-bottom: 0.65rem; color: rgba(235,245,255,0.94); }
+    .publication-venue{ font-family: var(--mono); color: rgba(170,200,255,0.82); font-size: 0.82rem; letter-spacing: 0.06em; margin-bottom: 0.65rem; }
+    .publication-authors{ color: rgba(175,195,225,0.80); font-size: 0.9rem; font-style: italic; margin-bottom: 0.9rem; }
+
+    .publication-link{
+      display:inline-flex;
+      align-items:center;
+      gap: 0.55rem;
       font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: rgba(200,220,255,0.92);
-      padding: 12px 12px;
-      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+      color: rgba(230,240,255,0.92);
+      text-decoration:none;
+      border: 1px solid rgba(170,200,255,0.20);
+      background: rgba(8,10,16,0.28);
+      padding: 0.55rem 0.9rem;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    summary::-webkit-details-marker{display:none;}
-    details .inner{
-      padding: 0 12px 12px;
-      color: rgba(235,245,255,0.70);
-      font-size: 13px;
-      line-height: 1.8;
-    }
-    .courseList{margin: 8px 0 0 18px;}
-    .courseList li{margin: 6px 0;}
+    .publication-link:hover{ transform: translateY(-2px); border-color: rgba(170,200,255,0.32); }
+    .publication-link img{ width: 14px; height: 14px; }
 
     /* Contact */
-    .contact{
-      display:flex; flex-wrap:wrap; gap: 10px; justify-content:center;
-      padding: 8px 0 20px;
+    #contact{ text-align:center; }
+    .contact-links{ display:flex; gap: 1rem; justify-content:center; flex-wrap: wrap; }
+    .contact-link{
+      padding: 0.85rem 1.2rem;
+      color: rgba(230,240,255,0.92);
+      text-decoration:none;
+      font-family: var(--mono);
+      border: 1px solid rgba(170,200,255,0.20);
+      border-radius: 14px;
+      background: rgba(8,10,16,0.30);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .contact-link:hover{ transform: translateY(-2px); border-color: rgba(170,200,255,0.35); }
+
+    /* Footer */
+    footer{
+      padding: 2.2rem 4rem;
+      text-align:center;
+      color: rgba(175,195,225,0.70);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      z-index: 1;
+      font-family: var(--mono);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
     }
 
-    footer{
-      padding: 18px 0 30px;
-      color: rgba(235,245,255,0.55);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      text-align:center;
+    /* Animations */
+    @keyframes fadeInUp{
+      from{ opacity:0; transform: translateY(26px); }
+      to{ opacity:1; transform: translateY(0); }
     }
+    .fade-in{ animation: fadeInUp 0.8s ease-out; }
 
     /* Responsive */
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns: 1fr; }
-      .termName h1{font-size: 44px;}
-      .projGrid{grid-template-columns: 1fr;}
-      .twoCol{grid-template-columns: 1fr;}
-      .nav-right{display:none;}
+    @media (max-width: 1024px){
+      header{ padding: 0.95rem 1.6rem; }
+      section{ padding: 3rem 2rem; }
+      .hero-about{
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2.4rem 2rem 2rem;
+      }
+      .hero-name{ font-size: 3.1rem; }
+      .hero-art{ min-height: 420px; }
     }
-    @media (max-width: 640px){
-      .navlinks{display:none;}
-      .brand{min-width:auto;}
+
+    @media (max-width: 768px){
+      nav{ display:none; } /* keep clean on mobile (optional) */
+      .hero-name{ font-size: 2.6rem; }
+      .publication-card{ min-width: 300px; }
     }
   </style>
 </head>
 
-<body class="fx-scanlines">
+<body>
+  <!-- Background layers -->
+  <div class="bg-texture"></div>
+  <div class="scanlines"></div>
+
   <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <a class="badge" href="#home" aria-label="Home">
-          <img src="images/icons/sp-logo.svg" alt="SP" />
-        </a>
-        <div class="lights" aria-hidden="true">
-          <div class="light red"></div>
-          <div class="light ylw"></div>
-          <div class="light grn"></div>
+    <a href="#home" class="brand">
+      <!-- ICON: images/icons/sp-logo.svg -->
+      <img src="images/icons/sp-logo.svg" alt="SP logo">
+      <span>Sachi Parikh</span>
+    </a>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Research</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- HERO -->
+    <section id="home" class="hero-about">
+      <div class="fade-in">
+        <div class="terminal-panel">
+          <div class="terminal-top">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="terminal-title">STATUS: ONLINE • NODE: SP</div>
+          </div>
+
+          <h1 class="hero-name">Sachi Parikh</h1>
+
+          <div class="hero-lines">
+            <div><span class="prompt">&gt;</span> building privacy-preserving systems</div>
+            <div><span class="prompt">&gt;</span> threat modeling &amp; security reviews</div>
+            <div><span class="prompt">&gt;</span> research: dark web NLP + medical imaging</div>
+            <div><span class="prompt">&gt;</span> currently: Amazon SDE + Security Guardian</div>
+          </div>
+
+          <div class="cta-row">
+            <a class="key-btn" href="#projects">
+              <span class="keycap">F1</span> Projects
+              <img src="images/icons/launch.svg" alt="">
+            </a>
+
+            <a class="key-btn" href="#experience">
+              <span class="keycap">F2</span> Experience
+              <img src="images/icons/launch.svg" alt="">
+            </a>
+
+            <a class="key-btn" href="https://github.com/parikhsachi" target="_blank" rel="noopener">
+              <span class="keycap">F4</span> GitHub
+              <img src="images/icons/launch.svg" alt="">
+            </a>
+
+            <a class="key-btn" href="#contact">
+              <span class="keycap">F5</span> Contact
+              <img src="images/icons/launch.svg" alt="">
+            </a>
+          </div>
+        </div>
+
+        <!-- ABOUT PANEL (keeps your exact text, just in-theme) -->
+        <div id="about" class="about-panel">
+          <p>
+            I'm currently a <span class="highlight">Software Development Engineer at Amazon</span>, where my work spans the full stack—from architecting distributed systems at scale to building production-grade ML pipelines.
+          </p>
+          <p>
+            I've been deeply passionate about Machine Learning since high school. I've published research at <span class="highlight-blue">NYU, Stanford, and UCSF</span> on ML applications in medical imaging, including developing CNNs for prostate cancer detection and analyzing Alzheimer's disease biomarkers. Beyond my professional work, I'm deeply engaged in the AI research community—hosting Kaggle hackathons and continuously exploring cutting-edge architectures through personal projects, from GANs and RNNs to reinforcement learning systems.
+          </p>
+          <p>
+            Security is another interest of mine. I serve as a <span class="highlight">Security Guardian at Amazon</span>, conducting threat modeling and security reviews to protect our systems. Previously, I spent two summers as an NSF Research Fellow at NYU's Cybersecurity Lab, where I built web scrapers and NLP systems to analyze dark web data and uncover security threats.
+          </p>
         </div>
       </div>
 
-      <nav class="navlinks" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#experience">Work</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#coursework">Coursework</a>
-        <a href="#research">Research</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <div class="nav-right">
-        <div class="status-pill">STATUS: ONLINE</div>
+      <!-- HERO ART -->
+      <div class="hero-art fade-in" aria-label="Hero artwork">
+        <!-- IMPORTANT: put your generated file here -->
+        <img src="images/hero-art.png" alt="Surreal cyber hero artwork">
       </div>
-    </div>
-  </header>
-
-  <main id="home" class="wrap hero">
-    <div class="heroShell">
-      <div class="surreal" id="surreal"></div>
-
-      <div class="heroGrid">
-        <!-- LEFT: CRT terminal -->
-        <section class="terminal" aria-label="Terminal intro">
-          <div class="termTop">
-            <div class="termTitle">sachi@portfolio:~</div>
-            <div class="termBtns">
-              <button class="chipBtn" data-jump="#projects">F1 Projects</button>
-              <button class="chipBtn" data-jump="#skills">F2 Skills</button>
-              <button class="chipBtn" data-jump="#coursework">F3 Coursework</button>
-              <button class="chipBtn" data-jump="#contact">F4 Contact</button>
-            </div>
-          </div>
-
-          <div class="termBody">
-            <div class="termName">
-              <span class="tag">SP</span>
-              <h1>Sachi Parikh</h1>
-            </div>
-
-            <div class="termLines" id="termLines">
-              <div><span class="prompt">&gt;</span> building privacy-preserving systems</div>
-              <div><span class="prompt">&gt;</span> threat modeling &amp; security reviews</div>
-              <div><span class="prompt">&gt;</span> research: dark web NLP + medical imaging</div>
-              <div><span class="prompt">&gt;</span> currently: Amazon SDE + Security Guardian<span class="typing-caret" aria-hidden="true"></span></div>
-            </div>
-
-            <div class="termKeys" aria-hidden="true">
-              <div class="key">[F1] Projects</div>
-              <div class="key">[F2] Skills</div>
-              <div class="key">[F3] Coursework</div>
-              <div class="key">[F4] Contact</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- RIGHT: Bio -->
-        <aside class="bio" id="about" aria-label="About">
-          <h2>Profile</h2>
-
-          <p>
-            Security-focused software engineer with research experience in <span class="hl2">dark web NLP</span> and
-            <span class="hl2">medical imaging ML</span>. Currently building <span class="hl">privacy-preserving analytics</span>
-            and doing threat modeling under real-world pressure tests.
-          </p>
-
-          <p>
-            I’m currently a <span class="hl">Software Development Engineer at Amazon</span>, and a certified
-            <span class="hl">Security Guardian</span> conducting security reviews. Previously, I was an NSF Research Fellow
-            at <span class="hl2">NYU’s Center for Cybersecurity</span>.
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn" href="https://github.com/parikhsachi" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn" href="images/Parikh_Sachi_2024.pdf" target="_blank" rel="noopener">Resume</a>
-            <a class="btn" href="#contact">Contact</a>
-          </div>
-
-          <div class="chips" aria-label="Highlights">
-            <span class="chip green">Amazon SDE</span>
-            <span class="chip cyan">Security Guardian</span>
-            <span class="chip violet">NSF Research Fellow</span>
-            <span class="chip">NLP</span>
-            <span class="chip">Threat Intel</span>
-            <span class="chip">Distributed Systems</span>
-          </div>
-        </aside>
-      </div>
-    </div>
+    </section>
 
     <!-- EDUCATION -->
     <section id="education">
-      <div class="sectionHdr">
-        <h3>Education</h3><div class="divider"></div>
+      <div class="section-header">
+        <h2 class="section-title">Education</h2>
       </div>
 
-      <div class="list">
-        <!-- Northwestern -->
-        <div class="row">
-          <div class="logoBox">
-            <a class="logoImg" href="https://www.usnews.com/best-colleges/northwestern-university-1739" target="_blank" rel="noopener" aria-label="Northwestern University link">
-              <div class="logoFallback">NU</div>
-            </a>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">2021 — 2025</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="Northwestern University — BA Computer Science, Minor Philosophy">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Northwestern University</h4>
-              <span class="sub">BA Computer Science • Minor Philosophy</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li><strong>GPA:</strong> 3.89/4.0</li>
-                <li><strong>Activities:</strong> CTF Cybersecurity Team, Women in Computing, WNUR 89.3 Radio Show</li>
-                <li><strong>National Science Foundation (NSF) Research Grantee:</strong> 2022, 2023</li>
-              </ul>
+      <div class="timeline-list">
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">2021 - 2025</div>
+            <h3 class="timeline-list-title">Northwestern University, <em>Evanston, IL</em></h3>
+            <div class="timeline-list-org">Bachelor of Arts in Computer Science, Minor in Philosophy</div>
+            <div class="timeline-list-description">
+              <p><strong>GPA:</strong> 3.89/4.0</p>
+              <p><strong>Activities:</strong> CTF Cybersecurity Team, Women in Computing, WNUR 89.3 Radio Show</p>
+              <p><strong>National Science Foundation (NSF) Research Grantee (2022, 2023)</strong></p>
             </div>
           </div>
         </div>
 
-        <!-- Lynbrook -->
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="Lynbrook High School">
-              <div class="logoFallback">LH</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">2017 — 2021</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="Lynbrook High School — Cupertino, CA">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Lynbrook High School</h4>
-              <span class="sub">Cupertino, CA</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li>NCWIT Aspirations in Computing Winner (2021)</li>
-                <li>National Merit Commended Scholar (2020)</li>
-                <li>ML4ALL Conference Speaker (2019) — 500+ attendees, 400,000+ views</li>
-              </ul>
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">2017 - 2021</div>
+            <h3 class="timeline-list-title">Lynbrook High School, <em>Cupertino, CA</em></h3>
+            <div class="timeline-list-description">
+              <p><strong>NCWIT Aspirations in Computing Winner (2021)</strong></p>
+              <p><strong>National Merit Commended Scholar (2020)</strong></p>
+              <p><strong>ML4ALL Conference Speaker (2019)</strong> - 500+ attendees, 400,000+ views</p>
             </div>
           </div>
         </div>
@@ -1029,117 +768,77 @@
 
     <!-- EXPERIENCE -->
     <section id="experience">
-      <div class="sectionHdr">
-        <h3>Experience</h3><div class="divider"></div>
+      <div class="section-header">
+        <h2 class="section-title">Experience</h2>
       </div>
 
-      <div class="list">
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="Amazon">
-              <div class="logoFallback">A</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Sept 2025 — Present • Jun — Sept 2024 (Intern)</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="Amazon — SDE I (Security Guardian)">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Amazon</h4>
-              <span class="sub">SDE I • Security Guardian</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li>Leading production launch of WorkDocs Progressive Web App built during internship (900k+ users)</li>
-                <li>Reduced Sev-2 queue by 85% (lowest level in 3 years)</li>
-                <li>Certified Security Guardian: threat modeling & comprehensive security reviews</li>
-                <li>Spearheading Bedrock integration for autonomous CLI execution & customer query handling</li>
-              </ul>
+      <div class="timeline-list">
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">Sept 2025 — Present, June - Sept 2024 (Intern)</div>
+            <h3 class="timeline-list-title">AMAZON: SDE I</h3>
+            <div class="timeline-list-description">
+              <p> - Leading production launch of the WorkDocs Progressive Web App I built during my internship, serving 900k+ users</p>
+              <p> - Reduced Sev-2 queue by 85%, bringing it to the lowest level in 3 years</p>
+              <p> - Certified Security Guardian: conducting threat modeling &amp; comprehensive security reviews</p>
+              <p> - Spearheading Bedrock integration with ticket queue for autonomous CLI execution/customer query handling</p>
             </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="NYU Center for Cybersecurity">
-              <div class="logoFallback">NYU</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Jun 2022 — Dec 2023</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="NYU Center for Cybersecurity — NSF Research Fellow">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>NYU Center for Cybersecurity</h4>
-              <span class="sub">NSF Research Fellow</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li>Investigated cryptocurrency + dark web infrastructure in fentanyl drug trafficking</li>
-                <li>Built Python web scrapers to extract data from dark web marketplaces</li>
-                <li>Applied NLP (spaCy) to develop database of drug trafficking organizations</li>
-                <li>Published research on encryption methods used by overseas organizations</li>
-              </ul>
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">June 2022 - Dec 2023</div>
+            <h3 class="timeline-list-title">NYU CENTER FOR CYBERSECURITY: NSF Research Fellow</h3>
+            <div class="timeline-list-description">
+              <p><strong>National Science Foundation (NSF) Research Grantee</strong></p>
+              <p> - Investigated cryptocurrency and dark web infrastructure in fentanyl drug trafficking</p>
+              <p> - Built Python web scrapers to extract data from dark web marketplaces for fentanyl trafficking research</p>
+              <p> - Applied Natural Language Processing techniques using spaCy to develop database of drug trafficking organizations</p>
+              <p> - Published research on encryption methods used by overseas drug trafficking organizations</p>
             </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="UCSF Sirota Lab">
-              <div class="logoFallback">U</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Jun — Aug 2020</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="UCSF Sirota Lab — Machine Learning Research Intern">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>UCSF Sirota Lab</h4>
-              <span class="sub">Machine Learning Research Intern</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li>Analyzed Alzheimer’s RNA-seq data in R, with Pandas/NumPy pipelines</li>
-                <li>Built Matplotlib visuals to identify differentially expressed genes</li>
-                <li>Published abstract in AMIA</li>
-              </ul>
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">Aug 2020 - June 2021</div>
+            <h3 class="timeline-list-title">LINGHACKS: Technical Curriculum Lead</h3>
+            <div class="timeline-list-description">
+              <p> - Led curriculum development for computational linguistics hackathon with chapters nationwide</p>
+              <p> - Created comprehensive Natural Language Processing workshops and educational content</p>
+              <p> - Mentored participants in Kaggle competitions and NLP projects</p>
             </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="Stanford PiMed Lab">
-              <div class="logoFallback">S</div>
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">June - Aug 2020</div>
+            <h3 class="timeline-list-title">UCSF SIROTA LAB: Machine Learning Research Intern</h3>
+            <div class="timeline-list-description">
+              <p>- Analyzed and pre-processed Alzheimer's Disease RNA-sequenced data in R using Pandas and NumPy</p>
+              <p>- Generated violin plots using Matplotlib to identify differentially expressed genes as disease biomarkers</p>
+              <p>- Collaborated with Dr. Marina Sirota and Dr. Chioma Belonwu on ML-driven biomarker discovery</p>
+              <p>- Published abstract in American Medical Informatics Association (AMIA) Journal</p>
             </div>
           </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Oct 2019 — May 2020</div>
-              <div class="miniBtns">
-                <button class="miniBtn" data-copy="Stanford PiMed Lab — ML Research Intern">COPY</button>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Stanford PiMed Lab</h4>
-              <span class="sub">Machine Learning Research Intern</span>
-            </div>
-            <div class="desc">
-              <ul>
-                <li>Improved MRI preprocessing with SimpleITK + TensorFlow/Keras</li>
-                <li>Developed ML approaches to histopathology images</li>
-                <li>Published abstract in BMES</li>
-              </ul>
+        </div>
+
+        <div class="timeline-list-item">
+          <div class="timeline-node"></div>
+          <div class="timeline-list-content">
+            <div class="timeline-list-dates">Oct 2019 - May 2020</div>
+            <h3 class="timeline-list-title">STANFORD PIMED LAB: Machine Learning Research Intern</h3>
+            <div class="timeline-list-description">
+              <p>- Improved image pre-processing models on MRI prostate cancer scans using SimpleITK, TensorFlow and Keras in Python</p>
+              <p>- Applied and developed novel Machine Learning approaches to MRI histopathology images under Dr. Mirabela Rusu</p>
+              <p>- Enhanced model accuracy for cancer detection through advanced preprocessing techniques</p>
+              <p>- Published abstract in Biomedical Engineering Society (BMES) Annual Journal</p>
             </div>
           </div>
         </div>
@@ -1148,322 +847,306 @@
 
     <!-- PROJECTS -->
     <section id="projects">
-      <div class="projectsHdr">
-        <div class="projectsTop">
-          <div class="label">Projects &amp; Research</div>
-          <div class="hint">— showing projects built from scratch, designed for real-world scale and pressure</div>
+      <div class="section-header">
+        <h2 class="section-title">Projects &amp; Research</h2>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Whisper Network -->
+        <div class="project-card" onclick="window.location.href='project-whisper-network.html'" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Whisper Network</h3>
+              <a href="project-whisper-network.html" class="project-link" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              A spy-themed, privacy-preserving Wordle cipher game inspired by AWS Clean Rooms.
+              Two agents collaborate and compete while only sharing aggregate analytics—never raw guesses.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">AWS Clean Rooms</span>
+              <span class="tech-tag">S3</span>
+              <span class="tech-tag">AWS Glue</span>
+              <span class="tech-tag">Athena</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">WebSockets</span>
+              <span class="tech-tag">Parquet</span>
+              <span class="tech-tag">Privacy Analytics</span>
+            </div>
+          </div>
         </div>
 
-        <div class="projGrid" id="projGrid"></div>
+        <!-- Dream Data Lakehouse -->
+        <div class="project-card" onclick="window.location.href='project-dream-lakehouse.html'" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Dream Data Lakehouse</h3>
+              <a href="project-dream-lakehouse.html" class="project-link" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Cinematic dream journal that transforms written dreams into surreal short films using AWS Bedrock (Claude + Luma Ray 2).
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">AWS Bedrock</span>
+              <span class="tech-tag">S3</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">ETL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Intelligence -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/email-intelligence-platform','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Email Intelligence Platform</h3>
+              <a href="https://github.com/parikhsachi/email-intelligence-platform" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Event-driven analytics platform that processes customer emails to generate business insights using AI-powered sentiment analysis and topic clustering.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">AWS Lambda</span>
+              <span class="tech-tag">AWS Bedrock</span>
+              <span class="tech-tag">DynamoDB</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">NLP</span>
+              <span class="tech-tag">ML</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- (keep the rest of your project cards unchanged structurally; styling now applies globally) -->
+
+        <!-- CNN Dog Breed -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/CNN-dogbreed-classifier','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">CNN Dog Breed Classifier</h3>
+              <a href="https://github.com/parikhsachi/CNN-dogbreed-classifier" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Deep learning model to identify canine breeds from images with 85%+ accuracy using transfer learning from ResNet-50.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Keras</span>
+              <span class="tech-tag">CNN</span>
+              <span class="tech-tag">ResNet-50</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotify Sorting Hat -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/hogwarts-sorting-hat-spotify','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Spotify Sorting Hat</h3>
+              <a href="https://github.com/parikhsachi/hogwarts-sorting-hat-spotify" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Full-stack app that analyzes Spotify listening data to "sort" users into Hogwarts houses based on music characteristics.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Django</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Spotify API</span>
+              <span class="tech-tag">ML</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RNN TV Script -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/RNN-TV-script-generator','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">RNN TV Script Generator</h3>
+              <a href="https://github.com/parikhsachi/RNN-TV-script-generator" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Recurrent neural network trained on 27 seasons of Simpsons scripts to generate new scenes using LSTM cells.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">RNN</span>
+              <span class="tech-tag">LSTM</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RL Quadcopter -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/RL-quadcopter-training-to-fly','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">RL Quadcopter Training</h3>
+              <a href="https://github.com/parikhsachi/RL-quadcopter-training-to-fly" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Autonomous quadcopter training using deep reinforcement learning with DDPG and reward shaping.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">DDPG</span>
+              <span class="tech-tag">RL</span>
+              <span class="tech-tag">Actor-Critic</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- GAN Faces -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/GAN-generating-faces','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">GAN Face Generator</h3>
+              <a href="https://github.com/parikhsachi/GAN-generating-faces" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Deep convolutional GAN for generating realistic face images through adversarial training on CelebA dataset.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">GANs</span>
+              <span class="tech-tag">DCGAN</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zebrafish -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/ZebrafishDrugDiscovery','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">Zebrafish Drug Discovery</h3>
+              <a href="https://github.com/parikhsachi/ZebrafishDrugDiscovery" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Computer vision system analyzing zebrafish behavior patterns to identify neuroactive compounds for drug discovery.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">CNNs</span>
+              <span class="tech-tag">ML</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FNN Bike Share -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/FNN-predicting-bike-share-data','_blank')" style="cursor:pointer;">
+          <div class="project-image"></div>
+          <div class="project-content">
+            <div class="project-header">
+              <h3 class="project-title">FNN Bike Share Predictor</h3>
+              <a href="https://github.com/parikhsachi/FNN-predicting-bike-share-data" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                <img src="images/icons/launch.svg" alt="Open">
+              </a>
+            </div>
+            <p class="project-description">
+              Neural network built from scratch using NumPy with custom backpropagation and gradient descent for time-series predictions.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Neural Networks</span>
+              <span class="tech-tag">Backpropagation</span>
+              <span class="tech-tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- SKILLS + COURSEWORK -->
-    <section id="skills">
-      <div class="sectionHdr">
-        <h3>Skills</h3><div class="divider"></div>
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="section-header">
+        <h2 class="section-title">Publications &amp; Speaking</h2>
       </div>
 
-      <div class="twoCol">
-        <div class="panel">
-          <div class="panelTitle">Skill Console</div>
-
-          <div class="tabs" id="skillTabs"></div>
-          <div class="skillChips" id="skillChips"></div>
+      <div class="publications-container">
+        <div class="publication-card">
+          <h3 class="publication-title">Machine Learning Analysis of Alzheimer's Disease Biomarkers</h3>
+          <div class="publication-venue">American Medical Informatics Association (AMIA) Journal</div>
+          <div class="publication-authors">Sachi Parikh, Dr. Marina Sirota, Dr. Chioma Belonwu</div>
+          <a href="https://drive.google.com/file/d/1Sr5xKs_oqFRPOWasTIw-39L64SyoPS2V/view?usp=sharing" class="publication-link">
+            Read Paper <img src="images/icons/launch.svg" alt="">
+          </a>
         </div>
 
-        <div class="panel" id="coursework">
-          <div class="panelTitle">Coursework + Online</div>
-
-          <div class="folders">
-            <details open>
-              <summary>
-                <span>Northwestern Coursework</span>
-                <span style="color: rgba(235,245,255,0.55); font-size: 10px;">folder</span>
-              </summary>
-              <div class="inner">
-                <ul class="courseList">
-                  <li>CS-348 — Game Engine (Konane Minimax/Alpha-Beta), Constraint Satisfaction (Sudoku)</li>
-                  <li>CS-376 — Exercises & search/expand implementations</li>
-                  <li>Security/CTF work — Northwestern Cybersecurity Team</li>
-                </ul>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>Udacity Nanodegree</span>
-                <span style="color: rgba(235,245,255,0.55); font-size: 10px;">folder</span>
-              </summary>
-              <div class="inner">
-                <ul class="courseList">
-                  <li>PLACEHOLDER: Add the nanodegree title + key projects</li>
-                  <li>PLACEHOLDER: Link certificate (optional)</li>
-                </ul>
-              </div>
-            </details>
-
-            <details>
-              <summary>
-                <span>Coursera — Google Cybersecurity Professional Certificate</span>
-                <span style="color: rgba(235,245,255,0.55); font-size: 10px;">folder</span>
-              </summary>
-              <div class="inner">
-                <ul class="courseList">
-                  <li>PLACEHOLDER: Add highlights (SIEM, incident response, risk, IAM basics)</li>
-                  <li>PLACEHOLDER: Link certificate (optional)</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research">
-      <div class="sectionHdr">
-        <h3>Research</h3><div class="divider"></div>
-      </div>
-
-      <div class="list">
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="UCSF">
-              <div class="logoFallback">AMIA</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Publication</div>
-              <div class="miniBtns">
-                <a class="miniBtn" href="https://drive.google.com/file/d/1Sr5xKs_oqFRPOWasTIw-39L64SyoPS2V/view?usp=sharing" target="_blank" rel="noopener">LINK</a>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Machine Learning Analysis of Alzheimer's Disease Biomarkers</h4>
-              <span class="sub">AMIA</span>
-            </div>
-            <div class="desc">Sachi Parikh, Dr. Marina Sirota, Dr. Chioma Belonwu</div>
-          </div>
+        <div class="publication-card">
+          <h3 class="publication-title">Novel ML Approaches for MRI Histopathology in Prostate Cancer</h3>
+          <div class="publication-venue">Biomedical Engineering Society (BMES) Annual Journal</div>
+          <div class="publication-authors">Sachi Parikh, Dr. Mirabela Rusu</div>
+          <a href="https://drive.google.com/file/d/1WpfIQgi0jETB4pKAdDizCNFXZM5jzoEY/view?usp=sharing" class="publication-link">
+            Read Paper <img src="images/icons/launch.svg" alt="">
+          </a>
         </div>
 
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="Stanford">
-              <div class="logoFallback">BMES</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Publication</div>
-              <div class="miniBtns">
-                <a class="miniBtn" href="https://drive.google.com/file/d/1WpfIQgi0jETB4pKAdDizCNFXZM5jzoEY/view?usp=sharing" target="_blank" rel="noopener">LINK</a>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>Novel ML Approaches for MRI Histopathology in Prostate Cancer</h4>
-              <span class="sub">BMES</span>
-            </div>
-            <div class="desc">Sachi Parikh, Dr. Mirabela Rusu</div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="logoBox">
-            <div class="logoImg" aria-label="ML4ALL">
-              <div class="logoFallback">YT</div>
-            </div>
-          </div>
-          <div class="rowBody">
-            <div class="meta">
-              <div class="dates">Talk</div>
-              <div class="miniBtns">
-                <a class="miniBtn" href="https://www.youtube.com/watch?v=iN7cAHpBA9s" target="_blank" rel="noopener">LINK</a>
-              </div>
-            </div>
-            <div class="titleLine">
-              <h4>My Journey Learning ML and AI through Self Study</h4>
-              <span class="sub">ML4ALL</span>
-            </div>
-            <div class="desc">Conference talk</div>
-          </div>
+        <div class="publication-card">
+          <h3 class="publication-title">My Journey Learning ML and AI through Self Study</h3>
+          <div class="publication-venue">ML4ALL</div>
+          <a href="https://www.youtube.com/watch?v=iN7cAHpBA9s" class="publication-link">
+            Watch Talk <img src="images/icons/launch.svg" alt="">
+          </a>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-      <div class="sectionHdr">
-        <h3>Contact</h3><div class="divider"></div>
+      <div class="section-header">
+        <h2 class="section-title">Contact</h2>
       </div>
 
-      <div class="contact">
-        <a class="btn" href="mailto:parikhsachi@gmail.com">Email</a>
-        <a class="btn" href="https://github.com/parikhsachi" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/sachi-p-b9b675167/" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="contact-links">
+        <a href="mailto:parikhsachi@gmail.com" class="contact-link">Email Me</a>
+        <a href="https://github.com/parikhsachi" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/sachi-p-b9b675167/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </section>
+  </div>
 
-    <footer>
-      © 2026 • Sachi Parikh • built in a terminal
-    </footer>
-  </main>
-
-  <script>
-    // ---- NAV key buttons ----
-    document.querySelectorAll("[data-jump]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const sel = btn.getAttribute("data-jump");
-        const el = document.querySelector(sel);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-
-    // ---- COPY mini buttons ----
-    document.querySelectorAll("[data-copy]").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const txt = btn.getAttribute("data-copy") || "";
-        try {
-          await navigator.clipboard.writeText(txt);
-          btn.textContent = "COPIED";
-          setTimeout(() => (btn.textContent = "COPY"), 900);
-        } catch (e) {
-          const ta = document.createElement("textarea");
-          ta.value = txt;
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand("copy");
-          document.body.removeChild(ta);
-          btn.textContent = "COPIED";
-          setTimeout(() => (btn.textContent = "COPY"), 900);
-        }
-      });
-    });
-
-    // ---- Parallax surreal background ----
-    const surreal = document.getElementById("surreal");
-    window.addEventListener("scroll", () => {
-      const y = window.scrollY || 0;
-      if (surreal) surreal.style.transform = "translateY(" + (y * 0.03) + "px)";
-    }, { passive: true });
-
-    // ---- Projects (edit here) ----
-    const projects = [
-      {
-        title: "Whisper Network",
-        desc: "A spy-themed, privacy-preserving Wordle cipher game inspired by AWS Clean Rooms. Agents collaborate/compete via aggregation-only “tapes”.",
-        tags: ["AWS Clean Rooms", "S3", "Glue", "Athena", "React", "TypeScript"],
-        accent: "g",
-        href: "project-whisper-network.html",
-      },
-      {
-        title: "Dream Data Lakehouse",
-        desc: "Cinematic dream journal that transforms written dreams into surreal short films using AWS Bedrock (Claude + Luma Ray 2).",
-        tags: ["TypeScript", "Python", "React", "AWS Bedrock", "S3", "FastAPI"],
-        accent: "c",
-        href: "project-dream-lakehouse.html",
-      },
-      {
-        title: "Email Intelligence Platform",
-        desc: "Event-driven analytics platform that processes customer emails to generate business insights using sentiment + topic clustering.",
-        tags: ["Java", "AWS Lambda", "DynamoDB", "Bedrock", "React", "NLP"],
-        accent: "v",
-        href: "https://github.com/parikhsachi/email-intelligence-platform",
-        external: true,
-      },
-      {
-        title: "CNN Dog Breed Classifier",
-        desc: "Deep learning classifier using transfer learning (ResNet-50) to identify dog breeds with strong accuracy.",
-        tags: ["Python", "Keras", "CNN", "ResNet-50", "Jupyter"],
-        accent: "c",
-        href: "https://github.com/parikhsachi/CNN-dogbreed-classifier",
-        external: true,
-      },
-      {
-        title: "Spotify Sorting Hat",
-        desc: "Full-stack app that analyzes Spotify listening data to sort users into Hogwarts houses based on audio features.",
-        tags: ["Python", "Django", "React", "Spotify API", "ML"],
-        accent: "g",
-        href: "https://github.com/parikhsachi/hogwarts-sorting-hat-spotify",
-        external: true,
-      },
-      {
-        title: "RNN TV Script Generator",
-        desc: "Recurrent model trained on Simpsons scripts to generate new scenes with LSTM cells.",
-        tags: ["Python", "TensorFlow", "RNN", "LSTM", "Jupyter"],
-        accent: "v",
-        href: "https://github.com/parikhsachi/RNN-TV-script-generator",
-        external: true,
-      },
-    ];
-
-    const projGrid = document.getElementById("projGrid");
-    const tagAccentClass = (accent) => accent === "g" ? "g" : (accent === "c" ? "c" : "v");
-
-    if (projGrid) {
-      projGrid.innerHTML = projects.map((p) => {
-        const tags = p.tags.map(t => `<span class="tag ${tagAccentClass(p.accent)}">${t}</span>`).join("");
-        const launch = p.external
-          ? `<a class="launchBtn" href="${p.href}" target="_blank" rel="noopener">LAUNCH</a>`
-          : `<a class="launchBtn" href="${p.href}">LAUNCH</a>`;
-
-        return `
-          <article class="projCard" role="button" tabindex="0" data-href="${p.href}" data-external="${p.external ? "1" : "0"}">
-            <div class="projTitle">${p.title}</div>
-            <div class="projDesc">${p.desc}</div>
-            <div class="tagRow">${tags}</div>
-            <div class="launchRow">
-              <span style="font-family: var(--mono); font-size: 11px; color: rgba(235,245,255,0.55); letter-spacing: 0.10em; text-transform: uppercase;">${p.external ? "external" : "page"}</span>
-              ${launch}
-            </div>
-          </article>
-        `;
-      }).join("");
-
-      projGrid.querySelectorAll(".projCard").forEach((card) => {
-        const href = card.getAttribute("data-href");
-        const ext = card.getAttribute("data-external") === "1";
-        const go = () => {
-          if (!href) return;
-          if (ext) window.open(href, "_blank", "noopener");
-          else window.location.href = href;
-        };
-        card.addEventListener("click", go);
-        card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") go(); });
-      });
-    }
-
-    // ---- Skills console ----
-    const skills = {
-      Languages: ["Python", "TypeScript", "Java", "SQL", "R"],
-      Frameworks: ["React", "FastAPI", "Django"],
-      Cloud: ["AWS S3", "AWS Lambda", "AWS Glue", "Athena", "DynamoDB", "Bedrock"],
-      Data: ["Parquet", "ETL", "Event-driven pipelines", "Data modeling"],
-      Security: ["Threat modeling", "Security reviews", "IAM basics", "Privacy analytics"],
-      ML: ["CNNs", "NLP (spaCy)", "RL", "GANs", "LSTMs"],
-    };
-
-    const skillTabs = document.getElementById("skillTabs");
-    const skillChips = document.getElementById("skillChips");
-    const categories = Object.keys(skills);
-
-    function renderSkills(active) {
-      if (skillTabs) {
-        skillTabs.innerHTML = categories.map((c) =>
-          `<button class="tab ${c === active ? "active" : ""}" data-cat="${c}">${c}</button>`
-        ).join("");
-      }
-      if (skillChips) {
-        skillChips.innerHTML = skills[active].map((s) => `<span class="skillChip">${s}</span>`).join("");
-      }
-      if (skillTabs) {
-        skillTabs.querySelectorAll(".tab").forEach((t) => {
-          t.addEventListener("click", () => renderSkills(t.getAttribute("data-cat")));
-        });
-      }
-    }
-    renderSkills(categories[0]);
-  </script>
+  <footer>
+    <p>&copy; 2025, Sachi Parikh</p>
+  </footer>
 </body>
 </html>
