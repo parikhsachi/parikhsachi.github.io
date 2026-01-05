@@ -784,6 +784,28 @@
   z-index: 1;
 }
 
+.timeline-logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(8,10,16,0.35);
+  border: 1px solid rgba(170,200,255,0.16);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 0 22px rgba(120,160,255,0.10);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 8px; /* add padding inside the box */
+}
+
+.timeline-logo img{
+  width: 100%; /* fill the available space */
+  height: 100%;
+  object-fit: contain; /* keeps aspect ratio, fits within bounds */
+  filter: drop-shadow(0 0 10px rgba(120,160,255,0.18));
+  opacity: 0.95;
+}
+
+
 /* Reuse your existing .pill style if you already have it.
    If not, this matches your theme. */
 .pill{
@@ -959,7 +981,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
               <div class="timeline-logo">
-    <img src="images/northwestern.png" alt="Northwestern University logo" class="full">
+    <img src="images/northwestern.png" alt="Northwestern University logo">
   </div>
 
   <div class="timeline-body">
@@ -979,7 +1001,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                           <div class="timeline-logo">
-    <img src="images/lynbrook.webp" alt="Northwestern University logo" class="full">
+    <img src="images/lynbrook.webp" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1007,7 +1029,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                                       <div class="timeline-logo">
-    <img src="images/amazon.png" alt="Northwestern University logo" class="full">
+    <img src="images/amazon.png" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1027,7 +1049,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                                       <div class="timeline-logo">
-    <img src="images/nyu.jpg" alt="Northwestern University logo" class="full">
+    <img src="images/nyu.jpg" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1048,7 +1070,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
             <div class="timeline-logo">
-    <img src="images/linghacks.png" alt="Northwestern University logo" class="full">
+    <img src="images/linghacks.png" alt="Northwestern university logo">
   </div>
 
   <div class="timeline-body">
@@ -1067,7 +1089,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                         <div class="timeline-logo">
-    <img src="images/ucsf1.jpg" alt="Northwestern University logo" class="full">
+    <img src="images/ucsf1.jpg" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1087,7 +1109,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                         <div class="timeline-logo">
-    <img src="images/stanford.png" alt="Northwestern University logo" class="full">
+    <img src="images/stanford.png" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
