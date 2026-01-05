@@ -92,7 +92,7 @@
     ::selection{ background: rgba(140, 180, 255, 0.35); color: white; }
 
     /* Layout container */
-    .container{ position: relative; z-index: 1; padding-top: 5.5rem; }
+    .container{ position: relative; z-index: 1; }
 
     /* Header */
     header{
@@ -160,14 +160,11 @@
     }
 
     /* Hero */
-    section{ padding: 4rem 4rem; position: relative; }
+    section{ padding: 2rem 2rem; position: relative; }
 
     .hero-about{
-      min-height: 92vh;
       display:grid;
       grid-template-columns: 1.05fr 0.95fr;
-      gap: 3.5rem;
-      padding: 3.5rem 4rem 2.5rem;
       align-items: center;
     }
 
@@ -419,14 +416,6 @@
       display:flex;
       align-items:center;
       gap: 0.6rem;
-    }
-    .section-title::before{
-      content:"";
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(170,200,255,0.55);
-      box-shadow: 0 0 16px rgba(120,160,255,0.22);
-      background: rgba(170,200,255,0.10);
     }
 
     /* Timeline */
