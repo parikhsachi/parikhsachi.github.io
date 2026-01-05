@@ -364,10 +364,16 @@
   display:block;
 
   /* the "blend in" magic */
-  mix-blend-mode: screen;       /* try: screen / lighten / soft-light */
-  opacity: 0.78;                /* keeps it layered, not loud */
+  mix-blend-mode: soft-light;       /* try: screen / lighten / soft-light */
+  opacity: 0.55;                /* keeps it layered, not loud */
   filter: saturate(1.05) contrast(1.05);
   transform: scale(1.03);
+  filter:
+    saturate(0.95)
+     contrast(0.92)
+     brightness(0.90)
+     blur(0.4px);
+
 }
 
 /* Optional: if you want it even more "cut out" */
@@ -984,7 +990,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                           <div class="timeline-logo">
-    <img src="images/lynbrook.png" alt="Northwestern University logo" class="full">
+    <img src="images/lynbrook.webp" alt="Northwestern University logo" class="full">
   </div>
 
   <div class="timeline-body">
@@ -1053,7 +1059,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
             <div class="timeline-logo">
-    <img src="images/linghacks.jpg" alt="Northwestern University logo" class="full">
+    <img src="images/linghacks.png" alt="Northwestern University logo" class="full">
   </div>
 
   <div class="timeline-body">
@@ -1072,7 +1078,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                         <div class="timeline-logo">
-    <img src="images/ucsf.jpg" alt="Northwestern University logo" class="full">
+    <img src="images/ucsf1.jpg" alt="Northwestern University logo" class="full">
   </div>
 
   <div class="timeline-body">
@@ -1092,7 +1098,7 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
                         <div class="timeline-logo">
-    <img src="images/stanford.jpg" alt="Northwestern University logo" class="full">
+    <img src="images/stanford.png" alt="Northwestern University logo" class="full">
   </div>
 
   <div class="timeline-body">
@@ -1396,7 +1402,6 @@
     <div class="skill-box">
       <div class="skill-box-top">
         <div class="skill-box-title">Languages</div>
-        <div class="skill-box-meta">core</div>
       </div>
       <div class="pill-list">
         <span class="pill">Python</span>
@@ -1413,7 +1418,6 @@
     <div class="skill-box">
       <div class="skill-box-top">
         <div class="skill-box-title">Frameworks</div>
-        <div class="skill-box-meta">ship</div>
       </div>
       <div class="pill-list">
         <span class="pill">React</span>
@@ -1427,7 +1431,6 @@
     <div class="skill-box">
       <div class="skill-box-top">
         <div class="skill-box-title">Machine Learning</div>
-        <div class="skill-box-meta">research</div>
       </div>
       <div class="pill-list">
         <span class="pill">PyTorch</span>
@@ -1462,7 +1465,6 @@
     <div class="skill-box skill-box-wide">
       <div class="skill-box-top">
         <div class="skill-box-title">Online Coursework / Certifications</div>
-        <div class="skill-box-meta">proof</div>
       </div>
 
       <div class="pill-list">
