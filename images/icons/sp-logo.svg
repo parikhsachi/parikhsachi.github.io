@@ -1,0 +1,14 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="46" height="46" rx="6"
+        fill="none"
+        stroke="rgba(160,190,255,0.8)"
+        stroke-width="2"/>
+  <text x="24" y="30"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="20"
+        fill="rgba(200,220,255,0.95)"
+        letter-spacing="1.5">
+    SP
+  </text>
+</svg>

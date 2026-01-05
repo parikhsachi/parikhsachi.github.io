@@ -1,0 +1,10 @@
+<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+  <path d="M6 4h10v10"
+        fill="none"
+        stroke="rgba(170,200,255,0.9)"
+        stroke-width="1.8"/>
+  <path d="M16 4L4 16"
+        fill="none"
+        stroke="rgba(170,200,255,0.9)"
+        stroke-width="1.8"/>
+</svg>
