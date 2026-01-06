@@ -505,7 +505,7 @@
 .timeline-list-content{
   display: grid;
   grid-template-columns: 64px 1fr; /* logo | text */
-  gap: 1.1rem;
+  gap: 3.1rem;
   align-items: start;
 }
 
@@ -616,18 +616,93 @@
       line-height: 1.7;
     }
 
-    /* Tech tags (re-tinted to match theme) */
-    .tech-tags{ display:flex; flex-wrap:wrap; gap: 0.45rem; }
+/* Tech tags */
+.tech-tags{ display:flex; flex-wrap:wrap; gap: 0.45rem; }
 
-    .tech-tag{
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.32rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(170,200,255,0.18);
-      background: rgba(8,10,16,0.28);
-      color: rgba(200,220,255,0.82);
-    }
+/* Base tag */
+.tech-tag{
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(170,200,255,0.16);
+  background: rgba(12,18,34,0.36);
+  color: rgba(220,235,255,0.92);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+/* Color families (all in your palette: blue/steel/gray) */
+.tech-tag.t-gray{
+  background: rgba(180, 200, 235, 0.16);
+  border-color: rgba(200, 220, 255, 0.14);
+  color: rgba(225, 235, 255, 0.88);
+}
+
+.tech-tag.t-steel{
+  background: rgba(120, 150, 210, 0.18);
+  border-color: rgba(170, 200, 255, 0.16);
+  color: rgba(230, 242, 255, 0.92);
+}
+
+.tech-tag.t-blue{
+  background: rgba(110, 150, 255, 0.18);
+  border-color: rgba(150, 190, 255, 0.18);
+  color: rgba(235, 245, 255, 0.94);
+}
+
+.tech-tag.t-deep{
+  background: rgba(70, 105, 200, 0.18);
+  border-color: rgba(120, 160, 255, 0.18);
+  color: rgba(235, 245, 255, 0.92);
+}
+
+.tech-tag.t-ice{
+  background: rgba(200, 225, 255, 0.14);
+  border-color: rgba(220, 235, 255, 0.16);
+  color: rgba(230, 240, 255, 0.92);
+}
+
+/* Hover: subtle lift */
+.tech-tag:hover{
+  border-color: rgba(170,200,255,0.28);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 18px rgba(120,160,255,0.08);
+  transform: translateY(-1px);
+}
+
+/* Small "open" link inside timeline cards */
+.timeline-open{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(170,200,255,0.18);
+  background: rgba(8,10,16,0.28);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  z-index: 5;
+}
+.timeline-open:hover{
+  transform: rotate(10deg) scale(1.02);
+  border-color: rgba(170,200,255,0.32);
+}
+.timeline-open img{
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 0 8px rgba(120,160,255,0.18));
+}
+
+/* Make sure the card can position children absolutely */
+.timeline-list-content{
+  position: relative;
+}
+
+
 
     /* Publications */
     .publications-container{
@@ -703,6 +778,20 @@
   opacity: 0.55;
   border-bottom: 1px solid rgba(170,200,255,0.10);
 }
+.caret{
+  display: inline-block;
+  width: 0.6ch;
+  margin-left: 0.35rem;
+  color: rgba(170,200,255,0.95);
+  text-shadow: 0 0 12px rgba(120,160,255,0.22);
+  animation: blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes blink{
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
 .terminal-panel{
   border-color: rgba(170,200,255,0.12);
   background: linear-gradient(180deg, rgba(12,18,34,0.70), rgba(8,10,16,0.45));
@@ -785,8 +874,8 @@
 }
 
 .timeline-logo{
-  width: 56px;
-  height: 56px;
+  width: 95px;
+  height: 95px;
   border-radius: 14px;
   background: rgba(8,10,16,0.35);
   border: 1px solid rgba(170,200,255,0.16);
@@ -794,7 +883,6 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 8px; /* add padding inside the box */
 }
 
 .timeline-logo img{
@@ -814,8 +902,8 @@
   padding: 0.32rem 0.7rem;
   border-radius: 999px;
   border: 1px solid rgba(170,200,255,0.18);
-  background: rgba(8,10,16,0.28);
-  color: rgba(200,220,255,0.84);
+  background: rgba(35, 80, 217, 0.32);
+  color: rgba(200, 220, 255, 1.0);
   display: inline-flex;
   align-items:center;
   gap: 0.4rem;
@@ -937,9 +1025,10 @@
 
         <div class="hero-lines">
           <div><span class="prompt">&gt;</span> currently: software development engineer @ amazon</div>
-          <div><span class="prompt">&gt;</span> prev: machine learning research at stanford, ucsf + nyu</div>
+          <div><span class="prompt">&gt;</span> prev: machine learning research @ stanford, ucsf + nyu</div>
           <div><span class="prompt">&gt;</span> prev: computer science + philosophy @ northwestern</div>
-          <div><span class="prompt">&gt;</span> interests: machine learning, security, networking</div>
+          <div><span class="prompt">&gt;</span> interests: machine learning, natural language processing, security, networking, databases</div>
+          <div><span class="prompt">&gt;</span> interests: post-structuralism, russian lit, sculpture, music<span class="caret">▋</span></div>
         </div>
 
         <div class="cta-row">
@@ -980,13 +1069,17 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+            <a class="timeline-open" href="https://www.usnews.com/best-colleges/northwestern-university-1739" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
+
               <div class="timeline-logo">
-    <img src="images/northwestern.png" alt="Northwestern University logo">
+    <img src="images/northwestern1.png" alt="Northwestern University logo">
   </div>
 
   <div class="timeline-body">
             <div class="timeline-list-dates">2021 - 2025</div>
-            <h3 class="timeline-list-title">Northwestern University, <em>Evanston, IL</em></h3>
+            <h3 class="timeline-list-title">Northwestern University</h3>
             <div class="timeline-list-org">Bachelor of Arts in Computer Science, Minor in Philosophy</div>
             <div class="timeline-list-description">
               <p><strong>GPA:</strong> 3.89/4.0</p>
@@ -1000,18 +1093,22 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                        <a class="timeline-open" href="https://www.usnews.com/education/best-high-schools/california/districts/fremont-union-high/lynbrook-high-school-2216" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
+
                           <div class="timeline-logo">
     <img src="images/lynbrook.webp" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
             <div class="timeline-list-dates">2017 - 2021</div>
-            <h3 class="timeline-list-title">Lynbrook High School, <em>Cupertino, CA</em></h3>
+            <h3 class="timeline-list-title">Lynbrook High School</h3>
             <div class="timeline-list-description">
               <p><strong>NCWIT Aspirations in Computing Winner (2021)</strong></p>
               <p><strong>National Merit Commended Scholar (2020)</strong></p>
               <p><strong>ML4ALL Conference Speaker (2019)</strong> - 500+ attendees, 400,000+ views</p>
-              <p><strong>SAT</strong>: 1550/1600</p>
+              <p><strong>SAT:</strong> 1550/1600</p>
             </div>
                             </div>
           </div>
@@ -1029,8 +1126,11 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                    <a class="timeline-open" href="https://amazon.jobs/content/en/job-categories/software-development" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
                                       <div class="timeline-logo">
-    <img src="images/amazon.png" alt="Northwestern university logo" >
+    <img src="images/download-1.png" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1049,6 +1149,9 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                                <a class="timeline-open" href="https://cyber.nyu.edu/" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
                                       <div class="timeline-logo">
     <img src="images/nyu.jpg" alt="Northwestern university logo" >
   </div>
@@ -1057,7 +1160,14 @@
             <div class="timeline-list-dates">June 2022 - Dec 2023</div>
             <h3 class="timeline-list-title">NSF Research Fellow @ NYU Center for Cybersecurity</h3>
             <div class="timeline-list-description">
-              <p><strong>National Science Foundation (NSF) Research Grantee</strong></p>
+<p>
+  <strong>
+    <a href="https://www.nsf.gov/funding/initiatives/reu" target="_blank" rel="noopener noreferrer">
+      National Science Foundation (NSF) Research Grantee
+    </a>
+  </strong>
+</p>
+
               <p> - Investigated cryptocurrency and dark web infrastructure in fentanyl drug trafficking</p>
               <p> - Built Python web scrapers to extract data from dark web marketplaces for fentanyl trafficking research</p>
               <p> - Applied Natural Language Processing techniques using spaCy to develop database of drug trafficking organizations</p>
@@ -1071,7 +1181,10 @@
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
             <div class="timeline-logo">
-    <img src="images/linghacks.png" alt="Northwestern university logo">
+                                                              <a class="timeline-open" href="https://www.linghacks.tech/past-events/linghacks-iii" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
+    <img src="images/images-1.png" alt="Northwestern university logo">
   </div>
 
   <div class="timeline-body">
@@ -1089,6 +1202,9 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                                                          <a class="timeline-open" href="https://sirotalab.ucsf.edu/" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
                         <div class="timeline-logo">
     <img src="images/ucsf1.jpg" alt="Northwestern university logo" >
   </div>
@@ -1109,8 +1225,11 @@
         <div class="timeline-list-item">
           <div class="timeline-node"></div>
           <div class="timeline-list-content">
+                                                                                      <a class="timeline-open" href="https://med.stanford.edu/rusulab.html" target="_blank" rel="noopener" aria-label="Open">
+  <img src="images/icons/launch.svg" alt="">
+</a>
                         <div class="timeline-logo">
-    <img src="images/stanford.png" alt="Northwestern university logo" >
+    <img src="images/stanford.avif" alt="Northwestern university logo" >
   </div>
 
   <div class="timeline-body">
@@ -1141,7 +1260,7 @@
             <div class="project-header">
               <h3 class="project-title">Whisper Network</h3>
               <a href="project-whisper-network.html" class="project-link" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
@@ -1149,16 +1268,14 @@
               Two agents collaborate and compete while only sharing aggregate analytics—never raw guesses.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">AWS Clean Rooms</span>
-              <span class="tech-tag">S3</span>
-              <span class="tech-tag">AWS Glue</span>
-              <span class="tech-tag">Athena</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Node.js</span>
-              <span class="tech-tag">WebSockets</span>
-              <span class="tech-tag">Parquet</span>
-              <span class="tech-tag">Privacy Analytics</span>
+            <span class="tech-tag t-deep">Clean Rooms</span>
+            <span class="tech-tag t-deep">S3</span>
+            <span class="tech-tag t-blue">React</span>
+            <span class="tech-tag t-deep">Glue</span>
+            <span class="tech-tag t-blue">Node.js</span>
+            <span class="tech-tag t-deep">Athena</span>
+            <span class="tech-tag t-steel">TypeScript</span>
+            <span class="tech-tag t-gray">Parquet</span>
             </div>
           </div>
         </div>
@@ -1169,49 +1286,47 @@
             <div class="project-header">
               <h3 class="project-title">Dream Data Lakehouse</h3>
               <a href="project-dream-lakehouse.html" class="project-link" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Cinematic dream journal that transforms written dreams into surreal short films using AWS Bedrock (Claude + Luma Ray 2).
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">AWS Bedrock</span>
-              <span class="tech-tag">S3</span>
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">ETL</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-steel">TypeScript</span>
+              <span class="tech-tag t-blue">React</span>
+              <span class="tech-tag t-deep">AWS Bedrock</span>
+              <span class="tech-tag t-deep">S3</span>
+              <span class="tech-tag t-blue">FastAPI</span>
+              <span class="tech-tag t-gray">ETL</span>
             </div>
           </div>
         </div>
 
-        <!-- Email Intelligence -->
-        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/email-intelligence-platform','_blank')" style="cursor:pointer;">
+                <!-- RL Quadcopter -->
+        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/RL-quadcopter-training-to-fly','_blank')" style="cursor:pointer;">
           <div class="project-content">
             <div class="project-header">
-              <h3 class="project-title">Email Intelligence Platform</h3>
-              <a href="https://github.com/parikhsachi/email-intelligence-platform" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+              <h3 class="project-title">RL Quadcopter Training</h3>
+              <a href="https://github.com/parikhsachi/RL-quadcopter-training-to-fly" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
-              Event-driven analytics platform that processes customer emails to generate business insights using AI-powered sentiment analysis and topic clustering.
+              Autonomous quadcopter training using deep reinforcement learning with DDPG and reward shaping.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Java</span>
-              <span class="tech-tag">AWS Lambda</span>
-              <span class="tech-tag">AWS Bedrock</span>
-              <span class="tech-tag">DynamoDB</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">NLP</span>
-              <span class="tech-tag">ML</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-gray">DDPG</span>
+              <span class="tech-tag t-ice">NumPy</span>
+              <span class="tech-tag t-ice">Matplotlib</span>
+              <span class="tech-tag t-ice">Pandas</span>
+              <span class="tech-tag t-blue">RL</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
-
-        <!-- (keep the rest of your project cards unchanged structurally; styling now applies globally) -->
 
         <!-- CNN Dog Breed -->
         <div class="project-card" onclick="window.open('https://github.com/parikhsachi/CNN-dogbreed-classifier','_blank')" style="cursor:pointer;">
@@ -1219,18 +1334,18 @@
             <div class="project-header">
               <h3 class="project-title">CNN Dog Breed Classifier</h3>
               <a href="https://github.com/parikhsachi/CNN-dogbreed-classifier" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Deep learning model to identify canine breeds from images with 85%+ accuracy using transfer learning from ResNet-50.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Keras</span>
-              <span class="tech-tag">CNN</span>
-              <span class="tech-tag">ResNet-50</span>
-              <span class="tech-tag">Jupyter</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-ice">Keras</span>
+              <span class="tech-tag t-ice">CNN</span>
+              <span class="tech-tag t-gray">ResNet-50</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
@@ -1241,18 +1356,18 @@
             <div class="project-header">
               <h3 class="project-title">Spotify Sorting Hat</h3>
               <a href="https://github.com/parikhsachi/hogwarts-sorting-hat-spotify" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Full-stack app that analyzes Spotify listening data to "sort" users into Hogwarts houses based on music characteristics.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Django</span>
-              <span class="tech-tag">React</span>
-              <span class="tech-tag">Spotify API</span>
-              <span class="tech-tag">ML</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-blue">Django</span>
+              <span class="tech-tag t-blue">React</span>
+              <span class="tech-tag t-blue">Spotify API</span>
+              <span class="tech-tag t-ice">ML</span>
             </div>
           </div>
         </div>
@@ -1263,40 +1378,19 @@
             <div class="project-header">
               <h3 class="project-title">RNN TV Script Generator</h3>
               <a href="https://github.com/parikhsachi/RNN-TV-script-generator" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Recurrent neural network trained on 27 seasons of Simpsons scripts to generate new scenes using LSTM cells.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">RNN</span>
-              <span class="tech-tag">LSTM</span>
-              <span class="tech-tag">Jupyter</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- RL Quadcopter -->
-        <div class="project-card" onclick="window.open('https://github.com/parikhsachi/RL-quadcopter-training-to-fly','_blank')" style="cursor:pointer;">
-          <div class="project-content">
-            <div class="project-header">
-              <h3 class="project-title">RL Quadcopter Training</h3>
-              <a href="https://github.com/parikhsachi/RL-quadcopter-training-to-fly" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
-              </a>
-            </div>
-            <p class="project-description">
-              Autonomous quadcopter training using deep reinforcement learning with DDPG and reward shaping.
-            </p>
-            <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">DDPG</span>
-              <span class="tech-tag">RL</span>
-              <span class="tech-tag">Actor-Critic</span>
-              <span class="tech-tag">Jupyter</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-ice">TensorFlow</span>
+              <span class="tech-tag t-ice">NumPy</span>
+              <span class="tech-tag t-blue">RNN</span>
+              <span class="tech-tag t-gray">LSTM</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
@@ -1307,18 +1401,19 @@
             <div class="project-header">
               <h3 class="project-title">GAN Face Generator</h3>
               <a href="https://github.com/parikhsachi/GAN-generating-faces" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Deep convolutional GAN for generating realistic face images through adversarial training on CelebA dataset.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TensorFlow</span>
-              <span class="tech-tag">GANs</span>
-              <span class="tech-tag">DCGAN</span>
-              <span class="tech-tag">Jupyter</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-ice">TensorFlow</span>
+              <span class="tech-tag t-ice">GANs</span>
+              <span class="tech-tag t-ice">NumPy</span>
+              <span class="tech-tag t-gray">MNIST</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
@@ -1329,18 +1424,21 @@
             <div class="project-header">
               <h3 class="project-title">Zebrafish Drug Discovery</h3>
               <a href="https://github.com/parikhsachi/ZebrafishDrugDiscovery" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Computer vision system analyzing zebrafish behavior patterns to identify neuroactive compounds for drug discovery.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">OpenCV</span>
-              <span class="tech-tag">CNNs</span>
-              <span class="tech-tag">ML</span>
-              <span class="tech-tag">Jupyter</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-gray">OpenCV</span>
+              <span class="tech-tag t-ice">CNN</span>
+              <span class="tech-tag t-ice">Scikit-learn</span>
+              <span class="tech-tag t-ice">Matplotlib</span>
+              <span class="tech-tag t-ice">Pandas</span>
+              <span class="tech-tag t-ice">NumPy</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
@@ -1351,18 +1449,19 @@
             <div class="project-header">
               <h3 class="project-title">FNN Bike Share Predictor</h3>
               <a href="https://github.com/parikhsachi/FNN-predicting-bike-share-data" class="project-link" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                <img src="images/icons/launch.svg" alt="Open">
+                Open <img src="images/icons/launch.svg" alt="Open">
               </a>
             </div>
             <p class="project-description">
               Neural network built from scratch using NumPy with custom backpropagation and gradient descent for time-series predictions.
             </p>
             <div class="tech-tags">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">NumPy</span>
-              <span class="tech-tag">Neural Networks</span>
-              <span class="tech-tag">Backpropagation</span>
-              <span class="tech-tag">Jupyter</span>
+              <span class="tech-tag t-steel">Python</span>
+              <span class="tech-tag t-ice">NumPy</span>
+              <span class="tech-tag t-ice">Matplotlib</span>
+              <span class="tech-tag t-ice">Feedforward Neural Net</span>
+              <span class="tech-tag t-ice">Pandas</span>
+              <span class="tech-tag t-gray">Jupyter</span>
             </div>
           </div>
         </div>
@@ -1397,6 +1496,7 @@
         <div class="publication-card">
           <h3 class="publication-title">My Journey Learning ML and AI through Self Study</h3>
           <div class="publication-venue">2019 Machine Learning 4 ALL (ML4ALL) Conference Speaker</div>
+          <div class="publication-authors">Sachi Parikh</div>
           <a href="https://www.youtube.com/watch?v=iN7cAHpBA9s" class="publication-link">
             Watch Talk <img src="images/icons/launch.svg" alt="">
           </a>
@@ -1415,14 +1515,14 @@
       <div class="skill-box-top">
         <div class="skill-box-title">Languages</div>
       </div>
-      <div class="pill-list">
-        <span class="pill">Python</span>
-        <span class="pill">Java</span>
-        <span class="pill">C/C++</span>
-        <span class="pill">SQL</span>
-        <span class="pill">R</span>
-        <span class="pill">TypeScript</span>
-        <span class="pill">JavaScript</span>
+      <div class="tech-tags">
+        <span class="tech-tag t-steel">Python</span>
+        <span class="tech-tag t-steel">Java</span>
+        <span class="tech-tag t-steel">C/C++</span>
+        <span class="tech-tag t-steel">SQL</span>
+        <span class="tech-tag t-steel">R</span>
+        <span class="tech-tag t-steel">TypeScript</span>
+        <span class="tech-tag t-steel">JavaScript</span>
       </div>
     </div>
 
@@ -1431,11 +1531,11 @@
       <div class="skill-box-top">
         <div class="skill-box-title">Frameworks</div>
       </div>
-      <div class="pill-list">
-        <span class="pill">React</span>
-        <span class="pill">Node.js</span>
-        <span class="pill">FastAPI</span>
-        <span class="pill">Django</span>
+      <div class="tech-tags">
+        <span class="tech-tag t-blue">React</span>
+        <span class="tech-tag t-blue">Node.js</span>
+        <span class="tech-tag t-blue">FastAPI</span>
+        <span class="tech-tag t-blue">Django</span>
       </div>
     </div>
 
@@ -1444,15 +1544,15 @@
       <div class="skill-box-top">
         <div class="skill-box-title">Machine Learning</div>
       </div>
-      <div class="pill-list">
-        <span class="pill">PyTorch</span>
-        <span class="pill">TensorFlow</span>
-        <span class="pill">Keras</span>
-        <span class="pill">NumPy</span>
-        <span class="pill">Pandas</span>
-        <span class="pill">spaCy</span>
-        <span class="pill">Scikit-learn</span>
-        <span class="pill">OpenCV</span>
+      <div class="tech-tags">
+        <span class="tech-tag t-ice">PyTorch</span>
+        <span class="tech-tag t-ice">TensorFlow</span>
+        <span class="tech-tag t-ice">Keras</span>
+        <span class="tech-tag t-ice">NumPy</span>
+        <span class="tech-tag t-ice">Pandas</span>
+        <span class="tech-tag t-ice">spaCy</span>
+        <span class="tech-tag t-ice">Scikit-learn</span>
+        <span class="tech-tag t-ice">OpenCV</span>
       </div>
     </div>
 
@@ -1462,14 +1562,14 @@
         <div class="skill-box-title">Cloud / Infra</div>
         <div class="skill-box-meta">aws</div>
       </div>
-      <div class="pill-list">
-        <span class="pill">Bedrock</span>
-        <span class="pill">S3</span>
-        <span class="pill">Lambda</span>
-        <span class="pill">Glue</span>
-        <span class="pill">Athena</span>
-        <span class="pill">Clean Rooms</span>
-        <span class="pill">DynamoDB</span>
+      <div class="tech-tags">
+        <span class="tech-tag t-deep">Bedrock</span>
+        <span class="tech-tag t-deep">S3</span>
+        <span class="tech-tag t-deep">Lambda</span>
+        <span class="tech-tag t-deep">Glue</span>
+        <span class="tech-tag t-deep">Athena</span>
+        <span class="tech-tag t-deep">Clean Rooms</span>
+        <span class="tech-tag t-deep">DynamoDB</span>
       </div>
     </div>
 
@@ -1514,7 +1614,7 @@
   </div>
 
   <footer>
-    <p>&copy; 2026, Sachi Parikh</p>
+    <p>&copy; 2026</p>
   </footer>
 </body>
 </html>
